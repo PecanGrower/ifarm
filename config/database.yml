@@ -1,0 +1,17 @@
+common: &common
+  adapter: postgresql
+  username: gregdaviet
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *common
+  database: ifarm_development
+
+test:
+  <<: *common
+  database: ifarm_test
+
+production:
+  <<: *common
+  database: ifarm_production
