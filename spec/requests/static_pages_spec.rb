@@ -15,8 +15,12 @@ describe "StaticPages" do
     end
 
     it "should have the correct title" do
-      expect(page).to have_selector('title', :text => "#{base_title} | Home")
+      expect(page).to have_selector('title', :text => "#{base_title}")
     end  
+
+    it "should not have a custom page title" do
+      expect(page).not_to have_selector('title', :text => "| Home")
+    end
   end
 
   describe "Help page" do
