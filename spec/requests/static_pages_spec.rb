@@ -7,7 +7,7 @@ describe "StaticPages" do
   describe "Home page" do
 
     before do
-      visit '/static_pages/home'
+      visit root_path
     end
     
     it "should have content iFarmPro" do
@@ -26,7 +26,7 @@ describe "StaticPages" do
   describe "Help page" do
     
     before do
-      visit '/static_pages/help'
+      visit help_path
     end
 
     it "should have the content 'Help'" do
@@ -41,7 +41,7 @@ describe "StaticPages" do
   describe "About page" do
     
     before do
-      visit '/static_pages/about'
+      visit about_path
     end
 
     it "should have the content 'About'" do
@@ -56,7 +56,7 @@ describe "StaticPages" do
   describe "Contact page" do
 
     before do
-      visit '/static_pages/contact'
+      visit contact_path
     end
 
     it "should have the content 'Contact iFarm" do
