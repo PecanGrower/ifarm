@@ -40,6 +40,11 @@ describe "User Pages" do
         click_button submit
         expect(page).to have_css('div.alert-success', text: 'iFarmPro')
       end
+
+      it "should have Sign out link" do
+        click_button submit
+        expect(page).to have_link('Sign out')
+      end
     end
   end
 
