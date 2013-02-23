@@ -20,9 +20,10 @@ describe User do
                        password: "foobar", 
                        password_confirmation: "foobar" }
 
-  before { @user = User.new(valid_attributes) } 
+  let(:company) { FactoryGirl.create(:company) }
+  let(:user) { company.users.new(valid_attributes) }
 
-  subject { @user }
+  subject { user }
 
   it { should be_valid }
   it "should have a valid factory" do
@@ -37,10 +38,16 @@ describe User do
     it { should respond_to(:password) }
     it { should respond_to(:password_confirmation) }
     it { should respond_to(:remember_token) }
+    it { should respond_to(:company_id) }
 
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :password_digest }
       it { should_not allow_mass_assignment_of :remember_token }
+      it { should_not allow_mass_assignment_of :company_id }
+    end
+
+    context "from associations" do
+      it { should respond_to :company }
     end
 
     context "that validates" do
@@ -56,8 +63,8 @@ describe User do
             addresses = %w[user@foo,com user_at_foo.org example.user@foo.
                            foo@bar_baz.com foo@bar+baz.com]
             addresses.each do |invalid_address|
-              @user.email = invalid_address
-              @user.should_not be_valid
+              user.email = invalid_address
+              user.should_not be_valid
             end      
           end
         end
@@ -65,15 +72,15 @@ describe User do
           it "should be valid" do
             addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
             addresses.each do |valid_address|
-              @user.email = valid_address
-              @user.should be_valid
+              user.email = valid_address
+              user.should be_valid
             end      
           end
         end
         context "when email address is already taken" do
           before do
-            user_with_same_email = @user.dup
-            user_with_same_email.email = @user.email.upcase
+            user_with_same_email = user.dup
+            user_with_same_email.email = user.email.upcase
             user_with_same_email.save
           end
 
@@ -83,9 +90,9 @@ describe User do
           let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 
           it "should be saved as all lower-case" do
-            @user.email = mixed_case_email
-            @user.save
-            @user.reload.email.should == mixed_case_email.downcase
+            user.email = mixed_case_email
+            user.save
+            user.reload.email.should == mixed_case_email.downcase
           end
         end
       end
@@ -93,16 +100,21 @@ describe User do
       context "password" do
         it { should ensure_length_of(:password).is_at_least(6) }
         context "when password is not present" do
-          before { @user.password = @user.password_confirmation = " " }
+          before { user.password = user.password_confirmation = " " }
           it { should_not be_valid }
         end
         context "when password doesn't match confirmation" do
-          before { @user.password_confirmation = "mismatch" }
+          before { user.password_confirmation = "mismatch" }
           it { should_not be_valid }
         end
       end
 
       it { should validate_presence_of(:password_confirmation) }
+
+      context "company_id" do
+        it { should validate_presence_of :company_id }
+        it { should validate_numericality_of(:company_id).only_integer }
+      end
     end
   end
 
@@ -110,11 +122,11 @@ describe User do
       it { should respond_to(:authenticate) }
 
       describe "return value of authenticate method" do
-        before { @user.save }
-        let(:found_user) { User.find_by_email(@user.email) }
+        before { user.save }
+        let(:found_user) { User.find_by_email(user.email) }
 
         context "with valid password" do
-          it { should == found_user.authenticate(@user.password) }
+          it { should == found_user.authenticate(user.password) }
         end
 
         context "with invalid password" do
@@ -126,7 +138,7 @@ describe User do
       end
   
       describe "remember_token" do
-        before { @user.save }
+        before { user.save }
         its(:remember_token) { should_not be_blank }
       end
   end

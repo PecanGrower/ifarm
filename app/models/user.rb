@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
 
+  belongs_to :company
+
   before_save { email.downcase! }
   before_save :create_remember_token
 
@@ -27,6 +29,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+  validates :company_id, presence: true, 
+                         numericality: { only_integer: true }
 
   private
 
