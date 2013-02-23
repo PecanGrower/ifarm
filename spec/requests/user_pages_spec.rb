@@ -17,9 +17,11 @@ describe "User Pages" do
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
-      
-      # it { should have_selector('div.alert-error') }
-      
+
+      it "should show error messages" do
+        click_button submit
+        page.should have_css('div#error_explanation')
+      end
     end
 
     describe "with valid infromation" do
