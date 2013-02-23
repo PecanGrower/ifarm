@@ -35,6 +35,11 @@ describe "User Pages" do
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
+
+      it "should have flash-success message" do
+        click_button submit
+        expect(page).to have_css('div.alert-success')
+      end
     end
   end
 
