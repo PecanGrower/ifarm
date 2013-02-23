@@ -25,6 +25,10 @@ describe User do
   subject { @user }
 
   it { should be_valid }
+  it "should have a valid factory" do
+    factory_user = FactoryGirl.build(:user)
+    expect(factory_user).to be_valid
+  end
 
   describe "attributes" do
     it { should respond_to(:name) }
