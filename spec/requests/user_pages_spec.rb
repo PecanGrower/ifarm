@@ -38,7 +38,7 @@ describe "User Pages" do
 
       it "should have flash-success message" do
         click_button submit
-        expect(page).to have_css('div.alert-success')
+        expect(page).to have_css('div.alert-success', text: 'iFarmPro')
       end
     end
   end
