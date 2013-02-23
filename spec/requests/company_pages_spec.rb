@@ -23,7 +23,7 @@ describe "Company Pages" do
         expect { click_button submit }.not_to change(User, :count)
       end
 
-      xit "should show error messages" do
+      it "should show error messages" do
         click_button submit
         expect(page).to have_css('div#error_explanation')
       end

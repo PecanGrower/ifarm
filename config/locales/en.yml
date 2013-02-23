@@ -7,3 +7,5 @@ en:
     attributes:
       user:
         password_digest: "Password"
+      "company/users":
+        password_digest: "Password"
