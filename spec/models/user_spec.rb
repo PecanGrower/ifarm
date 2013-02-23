@@ -15,8 +15,7 @@ require 'spec_helper'
 
 describe User do
  
-  valid_attributes = { name: "Example User", 
-                       email: "user@example.com",
+  valid_attributes = { email: "user@example.com",
                        password: "foobar", 
                        password_confirmation: "foobar" }
 
@@ -32,7 +31,6 @@ describe User do
   end
 
   describe "attributes" do
-    it { should respond_to(:name) }
     it { should respond_to(:email) }
     it { should respond_to(:password_digest) }
     it { should respond_to(:password) }
@@ -51,11 +49,6 @@ describe User do
     end
 
     context "that validates" do
-      context "name" do
-        it { should validate_presence_of(:name) }
-        it { should ensure_length_of(:name).is_at_most(50) }
-      end
-
       context "email" do
         it { should validate_presence_of(:email) }
         context "when email format is invalid" do
