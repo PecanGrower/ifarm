@@ -12,7 +12,7 @@ require 'spec_helper'
 
 describe Company do
 
-  valid_attributes = { name: "Pecan Farm" }
+  valid_attributes = { name: "Big Old Farm" }
 
   before { @company = Company.new(valid_attributes) }
 
@@ -29,6 +29,7 @@ describe Company do
 
     context "from associations" do
       it { should respond_to :users }
+      it { should accept_nested_attributes_for :users }
     end
   end
 

@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
-  validates :company_id, presence: true, 
-                         numericality: { only_integer: true }
 
   private
 

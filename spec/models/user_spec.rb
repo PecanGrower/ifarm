@@ -103,11 +103,6 @@ describe User do
       end
 
       it { should validate_presence_of(:password_confirmation) }
-
-      context "company_id" do
-        it { should validate_presence_of :company_id }
-        it { should validate_numericality_of(:company_id).only_integer }
-      end
     end
   end
 
