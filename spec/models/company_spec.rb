@@ -20,14 +20,14 @@ describe Company do
   it { should be_valid }
 
   describe "attributes" do
-    it { should respond_to :name }
+    it { should have_db_column :name }
 
     context "protected from mass assignment" do
       
     end
 
     context "from associations" do
-      it { should respond_to :users }
+      it { should have_many :users }
       it { should accept_nested_attributes_for :users }
     end
   end
