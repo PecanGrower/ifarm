@@ -34,19 +34,8 @@ describe Company do
   end
 
   describe "validations" do
-    
-    context "for name" do
-
-      context "when blank" do
-        before { company.name = " " }
-        it { should be_invalid }
-      end
-
-      context "when too long" do
-        before { company.name = "a" * 51 }
-        it { should be_invalid }
-      end
-    end
+    it { should validate_presence_of(:name) }
+    it { should ensure_length_of(:name).is_at_most(50) }
   end
 
   describe "methods" do
