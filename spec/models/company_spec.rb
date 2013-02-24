@@ -13,10 +13,9 @@ require 'spec_helper'
 describe Company do
 
   valid_attributes = { name: "Big Old Farm" }
+  let(:company) { Company.new(valid_attributes) }
 
-  before { @company = Company.new(valid_attributes) }
-
-  subject { @company }
+  subject { company }
 
   it { should be_valid }
 
@@ -38,12 +37,12 @@ describe Company do
     context "for name" do
 
       context "when blank" do
-        before { @company.name = " " }
+        before { company.name = " " }
         it { should be_invalid }
       end
 
       context "when too long" do
-        before { @company.name = "a" * 51 }
+        before { company.name = "a" * 51 }
         it { should be_invalid }
       end
     end
