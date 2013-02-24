@@ -48,6 +48,23 @@ describe "Authentication" do
     context "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 
+      context "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          sign_in(user)
+        end
+
+        it "should render the desired protected page after signing in" do
+          expect(page).to have_selector('title', text: 'Edit login')
+        end
+
+        it "should render the default(profile) page when signing in again" do
+          delete signout_path
+          sign_in(user)
+          expect(page).to have_selector('title', text: user.company.name)
+        end
+      end
+
       context "in the Users controller" do
         
         context "visiting the edit page" do
