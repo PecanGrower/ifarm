@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "Authentication pages" do
+describe "Authentication" do
   subject { page }
 
-  describe "signin" do
+  describe "signin page" do
     before { visit signin_path }
 
     it { should have_selector('h1',    text:'Sign in') }
@@ -34,10 +34,32 @@ describe "Authentication pages" do
       it { should have_link('Profile', href: company_path(user.company)) }
       it { should have_link('Sign out', href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
+      it { should have_link('Settings', href: edit_user_path(user)) }
 
       context "followed by signout" do
         before { click_link "Sign out" }
         it { should have_link('Sign in') }
+      end
+    end
+  end
+
+  describe "authorization" do
+    
+    context "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      context "in the Users controller" do
+        
+        context "visiting the edit page" do
+          before { visit edit_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+          it { should have_css('div.alert.alert-notice') }
+        end
+
+        context "submitting to the update action" do
+          before { put user_path(user) }
+          specify { response.should redirect_to(signin_path) }
+        end  
       end
     end
   end
