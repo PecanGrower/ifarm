@@ -70,12 +70,12 @@ describe User do
       end      
     end
 
-    it "should be save email as all lower-case" do
-      mixed_case_email = "Foo@ExAMPle.CoM"
-      user.email = mixed_case_email
-      user.save
-      user.reload.email.should == mixed_case_email.downcase
-    end
+    # it "should be save email as all lower-case" do
+    #   mixed_case_email = "Foo@ExAMPle.CoM"
+    #   user.email = mixed_case_email
+    #   user.save
+    #   user.reload.email.should == mixed_case_email.downcase
+    # end
   end
 
   describe "methods" do

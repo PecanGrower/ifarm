@@ -3,7 +3,7 @@ FactoryGirl.define do
     name "Big Pecan Farm"
   end
   factory :user do
-    email "michael@example.com"
+    email "Michael@Example.com"
     password "foobar"
     password_confirmation "foobar"
     company
