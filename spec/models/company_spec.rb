@@ -29,6 +29,7 @@ describe Company do
     context "from associations" do
       it { should have_many :users }
       it { should accept_nested_attributes_for :users }
+      it { should have_many :farms }
     end
   end
 

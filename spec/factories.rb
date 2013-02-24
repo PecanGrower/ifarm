@@ -8,4 +8,8 @@ FactoryGirl.define do
     password_confirmation "foobar"
     company
   end
+  factory :farm do
+    name "North Acreage Farm"
+    company
+  end
 end
