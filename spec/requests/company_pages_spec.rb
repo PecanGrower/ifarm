@@ -40,6 +40,16 @@ describe "Company Pages" do
       it "should create a company" do
         expect { click_button submit }.to change(Company, :count).by(1)
       end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      context "redirects to the Company page" do
+        before { click_button submit }
+        it { should have_selector('title', text: full_title('Big Old Farm')) }
+        it { should have_css('div.alert.alert-success', text: 'Welcome') }
+      end
     end
   end
   

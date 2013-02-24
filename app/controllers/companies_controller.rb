@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     if @company.save
-    #   flash[:success] = "Welcome to iFarmPro!"
+      flash[:success] = "Welcome to iFarmPro!"
       redirect_to company_path(@company)
     else
       render 'new'
