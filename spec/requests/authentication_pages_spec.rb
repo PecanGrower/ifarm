@@ -31,13 +31,10 @@ describe "Authentication" do
       end
 
       it { should have_selector('title', text: user.company.name) }
-      it { should have_link('Company', href: company_path(user.company)) }
-      it { should have_link('Sign out', href: signout_path) }
-      it { should_not have_link('Sign in', href: signin_path) }
-      it { should have_link('Settings', href: edit_user_path(user)) }
 
       context "followed by signout" do
         before { click_link "Sign out" }
+        
         it { should have_link('Sign in') }
       end
     end
