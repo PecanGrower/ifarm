@@ -1,7 +1,19 @@
 require 'spec_helper'
 
 describe "Company" do
+  let(:user) { FactoryGirl.create(:user) }
   subject { page }
+
+  describe "authorization" do
+    
+    context "when not signed-in" do
+      
+    end
+
+    context "when wrong user" do
+      
+    end
+  end
 
   describe "signup page" do
     before { visit signup_path }
@@ -54,7 +66,6 @@ describe "Company" do
   end
 
   describe "show page" do
-    let(:user) { FactoryGirl.create(:user) }
     before { sign_in(user) }
     
     it { should have_selector('title', text: user.company.name) }
