@@ -10,13 +10,13 @@ class CompaniesController < ApplicationController
     if @company.save
       sign_in @company.users.first
       flash[:success] = "Welcome to iFarmPro!"
-      redirect_to company_path(@company)
+      redirect_to @company
     else
       render 'new'
     end
   end
 
   def show
-    @company = Company.find(params[:id])
+    @company = current_user.company
   end
 end
