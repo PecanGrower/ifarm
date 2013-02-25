@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Company Pages" do
+describe "Company" do
   subject { page }
 
   describe "signup page" do
@@ -51,6 +51,14 @@ describe "Company Pages" do
         it { should have_css('div.alert.alert-success', text: 'Welcome') }
       end
     end
+  end
+
+  describe "show page" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { sign_in(user) }
+    
+    it { should have_selector('title', text: user.company.name) }
+    it { should have_selector('h1', text: user.company.name) }
   end
   
 end
