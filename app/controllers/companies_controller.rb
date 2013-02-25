@@ -8,6 +8,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     if @company.save
+      sign_in @company.users.first
       flash[:success] = "Welcome to iFarmPro!"
       redirect_to company_path(@company)
     else
