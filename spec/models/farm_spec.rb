@@ -26,6 +26,16 @@ describe Farm do
     expect(farm).to be_valid
   end
 
+  describe "tenant security" do
+    let!(:wrong_data) { FactoryGirl.create(Farm) }
+
+    it "should have only the current company's data" do
+      farm.save
+      expect(Farm.all).not_to include(wrong_data)
+      expect(Farm.all).to include(farm)
+    end
+  end
+
   describe "attributes" do
     it { should have_db_column :name }
     it { should have_db_column :company_id }

@@ -41,9 +41,9 @@ describe "Authentication" do
   end
 
   describe "authorization" do
-    
+    let(:user) { FactoryGirl.create(:user) }
+
     context "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
 
       context "when attempting to visit a protected page" do
         before do
@@ -74,6 +74,14 @@ describe "Authentication" do
           before { put user_path(user) }
           specify { response.should redirect_to(signin_path) }
         end  
+      end
+    end
+
+    context "for correct company" do
+      
+      it "should return the correct Company.current_id for the current user" do
+        sign_in(user)
+        expect(Company.current_id).to eq user.company.id
       end
     end
 
