@@ -1,4 +1,7 @@
 class StaticPagesController < ApplicationController
+  
+  skip_before_filter :signed_in_user
+
   def home
     @company = current_user.company if signed_in?
   end
