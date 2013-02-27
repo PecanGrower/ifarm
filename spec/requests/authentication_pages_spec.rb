@@ -46,34 +46,28 @@ describe "Authentication" do
     context "for non-signed-in users" do
 
       context "when attempting to visit a protected page" do
-        before do
-          visit edit_user_path(user)
-          sign_in(user)
-        end
+        before { visit edit_user_path(user) }
+
+        it { should have_selector('title', text: 'Sign in') }
+        it { should have_css('div.alert.alert-notice') }
 
         it "should render the desired protected page after signing in" do
+          sign_in(user)
           expect(page).to have_selector('title', text: 'Edit login')
         end
 
         it "should render the default(profile) page when signing in again" do
+          sign_in(user)
           delete signout_path
           sign_in(user)
           expect(page).to have_selector('title', text: user.company.name)
         end
       end
 
-      context "in the Users controller" do
-        
-        context "visiting the edit page" do
-          before { visit edit_user_path(user) }
-          it { should have_selector('title', text: 'Sign in') }
-          it { should have_css('div.alert.alert-notice') }
-        end
+      context "when attempting to access protected action" do
+        before { put user_path(user) }
 
-        context "submitting to the update action" do
-          before { put user_path(user) }
-          specify { response.should redirect_to(signin_path) }
-        end  
+        specify { response.should redirect_to(signin_path) }
       end
     end
 
