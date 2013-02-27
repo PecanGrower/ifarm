@@ -1,15 +1,15 @@
 FactoryGirl.define do
   factory :company do
-    name "Big Pecan Farm"
+    sequence(:name) { |n| "Company #{n}" }
   end
   factory :user do
-    email "Michael@Example.com"
+    sequence(:email) { |n| "User_#{n}@Example.com" }
     password "foobar"
     password_confirmation "foobar"
     company
   end
   factory :farm do
-    name "North Acreage Farm"
+    sequence(:name) { |n| "Farm #{n}" }
     company
   end
 end
