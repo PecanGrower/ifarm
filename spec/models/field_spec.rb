@@ -37,13 +37,16 @@ describe Field do
 
   describe "tenant security" do
 
-    it "should have on the current company's data" do
+    it "should have only the current company's data" do
       wrong_company = FactoryGirl.create(:company)
       Company.current_id = wrong_company.id
-      wrong_data = @block.fields.create(name: "Wrong")
+      parent = FactoryGirl.create(:block)
+      expect(parent).to be_valid
+      child = parent.fields.create(valid_attributes)
+      expect(child).to be_valid
       Company.current_id = company.id
       @field.save
-      expect(Field.all).not_to include(wrong_data)
+      expect(Field.all).not_to include(child)
       expect(Field.all).to include(@field)
     end
   end
