@@ -48,10 +48,6 @@ describe Farm do
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :company_id }
     end
-
-    # context "from associations" do
-    #   it { should belong_to :company }
-    # end
   end
 
   describe "validations" do
