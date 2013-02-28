@@ -37,10 +37,13 @@ describe Block do
     it "should have on the current company's data" do
       wrong_company = FactoryGirl.create(:company)
       Company.current_id = wrong_company.id
-      wrong_data = @farm.blocks.create(name: "Wrong")
+      parent = FactoryGirl.create(:farm)
+      expect(parent).to be_valid
+      child = parent.blocks.create(valid_attributes)
+      expect(child).to be_valid
       Company.current_id = company.id
       @block.save
-      expect(Block.all).not_to include(wrong_data)
+      expect(Block.all).not_to include(child)
       expect(Block.all).to include(@block)
     end
   end
