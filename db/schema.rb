@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228025250) do
+ActiveRecord::Schema.define(:version => 20130228033817) do
 
   create_table "blocks", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20130228025250) do
   end
 
   add_index "farms", ["company_id"], :name => "index_farms_on_company_id"
+
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.decimal  "acreage"
+    t.integer  "block_id"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "fields", ["block_id"], :name => "index_fields_on_block_id"
+  add_index "fields", ["company_id"], :name => "index_fields_on_company_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"
