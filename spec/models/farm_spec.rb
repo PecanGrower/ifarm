@@ -36,7 +36,7 @@ describe Farm do
       wrong_data = Farm.create(name: "Wrong Farm")
       Company.current_id = company.id
       farm.save
-      expect(Farm.all).not_to include(@wrong_data)
+      expect(Farm.all).not_to include(wrong_data)
       expect(Farm.all).to include(farm)
     end
   end
