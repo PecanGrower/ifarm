@@ -2,8 +2,25 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :signed_in_user
+  around_filter :scope_current_company
 
   private
+
+    # -------- Company Data Segration Methods -------
+
+    def scope_current_company
+      Company.current_id = current_company.id if signed_in?
+      yield
+    ensure
+      Company.current_id = nil
+    end
+
+    def current_company
+      current_user.company
+    end
+
+    # -------- User Authentication Methods ----------
+
     def signed_in_user
       unless signed_in?
         store_location
@@ -38,6 +55,8 @@ class ApplicationController < ActionController::Base
     def current_user?(user)
       user == current_user
     end
+
+    # -------- Friendly Forwarding Methods ----------
 
     def store_location
       session[:return_to] = request.url
