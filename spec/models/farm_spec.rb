@@ -31,12 +31,13 @@ describe Farm do
   describe "tenant security" do
 
     it "should have only the current company's data" do
-      wrong_company = FactoryGirl.create(Company)
+      wrong_company = FactoryGirl.create(:company)
       Company.current_id = wrong_company.id
-      wrong_data = Farm.create(name: "Wrong Farm")
+      child = Farm.create(name: valid_attributes)
+      expect(child).to be_valid
       Company.current_id = company.id
       farm.save
-      expect(Farm.all).not_to include(wrong_data)
+      expect(Farm.all).not_to include(child)
       expect(Farm.all).to include(farm)
     end
   end
