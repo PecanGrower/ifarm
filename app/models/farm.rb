@@ -14,6 +14,8 @@ class Farm < ActiveRecord::Base
 
   default_scope { where(company_id: Company.current_id) }
 
+  has_many :blocks
+
   validates :name, presence: true,
                     uniqueness: { scope: :company_id },
                     length: { maximum: 50 }
