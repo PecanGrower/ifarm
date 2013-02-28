@@ -16,20 +16,20 @@ describe Block do
 
   valid_attributes = { name: "1" }
   let(:company) { FactoryGirl.create(:company) }
+  let(:farm) { FactoryGirl.create(:farm) }
+  let(:block) { farm.blocks.build(valid_attributes) }
 
   before do
     Company.current_id = company.id
-    @farm = Farm.create(FactoryGirl.attributes_for(:farm))
-    @block = @farm.blocks.build(valid_attributes)
   end
 
-  subject { @block }
+  subject { block }
 
   it { should be_valid }
 
   it "should have a valid factory" do
-    block = FactoryGirl.build(:block)
-    expect(block).to be_valid
+    factory = FactoryGirl.build(:block)
+    expect(factory).to be_valid
   end
 
   describe "tenant security" do
@@ -42,9 +42,9 @@ describe Block do
       child = parent.blocks.create(valid_attributes)
       expect(child).to be_valid
       Company.current_id = company.id
-      @block.save
+      block.save
       expect(Block.all).not_to include(child)
-      expect(Block.all).to include(@block)
+      expect(Block.all).to include(block)
     end
   end
 
