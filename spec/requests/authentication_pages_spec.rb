@@ -73,9 +73,8 @@ describe "Authentication" do
 
     context "for correct company" do
       
-      it "should return the correct Company.current_id for the current user" do
-        sign_in(user)
-        expect(Company.current_id).to eq user.company.id
+      it "should return nil for Company.current_id external to methods" do
+        expect(Company.current_id).to be_nil
       end
     end
 

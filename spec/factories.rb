@@ -10,6 +10,6 @@ FactoryGirl.define do
   end
   factory :farm do
     sequence(:name) { |n| "Farm #{n}" }
-    company
+    # company
   end
 end
