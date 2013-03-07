@@ -69,7 +69,6 @@ describe "Company" do
     before { sign_in(user) }
     
     it { should have_selector('title', text: user.company.name) }
-    it { should have_selector('h1', text: user.company.name) }
   end
   
 end
