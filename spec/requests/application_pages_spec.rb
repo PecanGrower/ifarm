@@ -16,7 +16,6 @@ describe "ApplicationPages" do
     context "when not signed in" do
       before do
         click_link 'Sign out'
-        visit root_path
       end 
 
       it { should_not have_css '.sidebar-nav' }
