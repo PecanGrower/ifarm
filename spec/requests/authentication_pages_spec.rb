@@ -58,7 +58,7 @@ describe "Authentication" do
 
         it "should render the default(profile) page when signing in again" do
           sign_in(user)
-          delete signout_path
+          click_link 'Sign out'
           sign_in(user)
           expect(page).to have_selector('title', text: user.company.name)
         end
