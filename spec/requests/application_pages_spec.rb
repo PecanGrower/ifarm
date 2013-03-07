@@ -20,5 +20,9 @@ describe "ApplicationPages" do
 
       it { should_not have_css '.sidebar-nav' }
     end
+
+    it "should display the company name" do
+      expect(page).to have_css('.sidebar-nav', text: user.company.name)
+    end
   end
 end
