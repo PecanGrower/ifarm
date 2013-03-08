@@ -1,0 +1,12 @@
+<% provide :title, 'Add Farm' %>
+
+<h1>Add Farm</h1>
+
+<%= form_for(@farm) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name, "Farm Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create New Farm", class: "btn btn-large btn-primary" %>
+<% end %>
