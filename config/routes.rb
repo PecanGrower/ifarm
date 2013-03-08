@@ -3,6 +3,7 @@ Ifarm::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :companies, only: [:create, :show]
   resources :users, only: [:edit, :update]
+  resources :farms, only: [:index]
 
   root to: 'static_pages#home'
 

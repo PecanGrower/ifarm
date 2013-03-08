@@ -24,5 +24,10 @@ describe "ApplicationPages" do
     it "should display the company name" do
       expect(page).to have_css('.sidebar-nav', text: user.company.name)
     end
+
+    it "should have the correct links" do
+      click_link "Farms"
+      expect(page).to have_selector 'title', text: full_title('Farms')
+    end
   end
 end
