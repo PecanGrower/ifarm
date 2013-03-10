@@ -1,35 +1,11 @@
 <% provide :title, 'Farms' %>
-<h1>Farms</h1>
-<%= link_to 'New Farm', new_farm_path %>
 
-<table>
-  <tr>
-    <th>Farm</th>
-    <th>Blocks</th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Farms</h1>
 
 <% @farms.each do |farm| %>
-  <tr>
-    <td><%= farm.name %></td>
-    <td>
-      <% farm.blocks.each do |block| %>
-        <tr>
-          <td><%= block.name %></td>
-          <td>
-            <% block.fields.each do |field| %>
-              <tr>
-                <td><%= field.name %></td>
-              </tr>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </td>
-    <td><%#= link_to 'Destroy', '#'%></td>
-  </tr>
+  <div class="article">
+    <h3><%#= link_to farm.name, farm %></h3>
+  </div>
 <% end %>
-</table>
 
-<br />
+<%= link_to 'New Farm', new_farm_path %>
