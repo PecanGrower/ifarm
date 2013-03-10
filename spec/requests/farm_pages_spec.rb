@@ -13,15 +13,15 @@ describe "Farm" do
 
   describe "index page" do
 
-    let(:farm) { FactoryGirl.create(:farm) }
+    let!(:farm) { FactoryGirl.create(:farm) }
 
     before do 
       visit farms_path
-      Company.current_id = user.company.id
+      # Company.current_id = user.company.id
     end
 
     it { should have_selector 'title', text: full_title('Farm') }
-    xit { should have_link farm.name, href: farm_path(farm) }
+    it { should have_link farm.name, href: farm_path(farm) }
     it { should have_link('New Farm', href: new_farm_path) }
   end
 
