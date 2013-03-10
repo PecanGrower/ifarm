@@ -26,4 +26,14 @@ class FarmsController < ApplicationController
     @farm = Farm.find(params[:id])
   end
 
+  def update
+    @farm = Farm.find(params[:id])
+    if @farm.update_attributes(params[:farm])
+      flash[:success] = "Updated"
+      redirect_to @farm
+    else
+      render 'edit'
+    end
+  end
+
 end

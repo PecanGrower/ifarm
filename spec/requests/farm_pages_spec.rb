@@ -39,7 +39,7 @@ describe "Farm" do
 
   describe "new page" do
     before { visit new_farm_path }
-    let(:submit) { "Create New Farm" }
+    let(:submit) { "Save" }
 
     it { should have_selector 'title', text: full_title('Add Farm') }
     it { should have_selector 'h1', text: 'Add Farm' }
@@ -59,5 +59,33 @@ describe "Farm" do
     before { visit edit_farm_path(farm) }
 
     it { should have_selector 'title', text: "Edit #{farm.name}" }
+    it { should have_selector 'h1', text: "Edit #{farm.name}" }
+    it { should have_link "Cancel", href: farm_path(farm) }
+
+    context "with invalid information" do
+      let(:new_name) { "" }
+      let(:submit) { "Save" }
+      before do
+        fill_in "Farm Name", with: new_name
+        click_button submit
+      end
+
+      it { should have_selector 'title', text: "Edit #{new_name}" }
+      it { should have_css '.alert-error' }
+    end
+
+    context "with valid information" do
+      let(:new_name) { "New Name" }
+      let(:submit) { "Save" }
+      before do
+        fill_in "Farm Name", with: new_name
+        click_button submit
+      end
+
+      it { should have_selector 'title', text: full_title(new_name) }
+      it { should have_css '.alert-success', text: "Updated" }
+      specify { farm.reload.name.should == new_name }
+      
+    end
   end
 end

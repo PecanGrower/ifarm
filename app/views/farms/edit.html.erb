@@ -1,1 +1,7 @@
 <% provide :title, "Edit #{@farm.name}" %>
+
+<h1>Edit <%= @farm.name %></h1>
+
+<%= render 'form' %>
+
+<%= link_to "Cancel", @farm %>
