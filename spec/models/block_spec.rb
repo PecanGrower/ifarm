@@ -32,6 +32,8 @@ describe Block do
     expect(factory).to be_valid
   end
 
+  it { should accept_nested_attributes_for :fields }
+
   describe "tenant security" do
     
     it "should have on the current company's data" do
@@ -56,6 +58,7 @@ describe Block do
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :farm_id }
       it { should_not allow_mass_assignment_of :company_id }
+      it { should allow_mass_assignment_of :fields_attributes }
     end
   end
 

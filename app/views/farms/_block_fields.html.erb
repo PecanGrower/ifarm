@@ -1,4 +1,8 @@
 <fieldset>
   <%= f.label :name, "Block" %><br />
   <%= f.text_field :name %><br />
+
+  <%= f.fields_for :fields do |builder| %>
+    <%= render 'field_fields', f: builder %>
+  <% end %>
 </fieldset>
