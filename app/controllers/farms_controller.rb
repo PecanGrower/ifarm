@@ -22,4 +22,8 @@ class FarmsController < ApplicationController
     end
   end
 
+  def edit
+    @farm = Farm.find(params[:id])
+  end
+
 end
