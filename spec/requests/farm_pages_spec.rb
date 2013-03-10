@@ -33,6 +33,7 @@ describe "Farm" do
     it { should have_selector 'h1', text: farm.name }
     it { should have_selector 'li', text: block.name }
     it { should have_selector 'li', text: field.name }
+    it { should have_link 'Back to Farms', href: farms_path }
   end
 
   describe "new page" do
