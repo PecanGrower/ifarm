@@ -16,12 +16,12 @@ FactoryGirl.define do
   end
 
   factory :block do
-    sequence(:name) { |n| "#{n}" }
+    sequence(:name) { |n| "Block #{n}" }
     farm
   end
 
   factory :field do
-    sequence(:name) { |n| "#{n}" }
+    sequence(:name) { |n| "Field #{n}" }
     acreage 9.8
     block
   end

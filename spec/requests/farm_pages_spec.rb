@@ -15,14 +15,24 @@ describe "Farm" do
 
     let!(:farm) { FactoryGirl.create(:farm) }
 
-    before do 
-      visit farms_path
-      # Company.current_id = user.company.id
-    end
+    before { visit farms_path }
 
     it { should have_selector 'title', text: full_title('Farm') }
     it { should have_link farm.name, href: farm_path(farm) }
     it { should have_link('New Farm', href: new_farm_path) }
+  end
+
+  describe "show page" do
+    let!(:farm) { FactoryGirl.create(:farm) }
+    let!(:block) { FactoryGirl.create(:block, farm: farm) }
+    let!(:field) { FactoryGirl.create(:field, block: block) }
+
+    before { visit farm_path(farm) }
+
+    it { should have_selector 'title', text: full_title(farm.name) }
+    it { should have_selector 'h1', text: farm.name }
+    it { should have_selector 'li', text: block.name }
+    it { should have_selector 'li', text: field.name }
   end
 
   describe "new page" do

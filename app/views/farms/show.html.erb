@@ -1,0 +1,16 @@
+<% provide :title, @farm.name %>
+
+<h1><%= @farm.name %></h1>
+
+<ul class="blocks">
+  <% @farm.blocks.each do |block| %>
+    <li>
+      <%= block.name %>
+      <ul class="fields">
+        <% block.fields.each do |field| %>
+          <li><%= field.name %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
