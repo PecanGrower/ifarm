@@ -55,6 +55,7 @@ describe "Farm" do
 
   describe "edit page" do
     let!(:farm) { FactoryGirl.create(:farm) }
+    let!(:block) { FactoryGirl.create(:block, farm: farm) }
 
     before { visit edit_farm_path(farm) }
 
@@ -76,15 +77,18 @@ describe "Farm" do
 
     context "with valid information" do
       let(:new_name) { "New Name" }
+      let(:new_block) { "New Block" }
       let(:submit) { "Save" }
       before do
         fill_in "Farm Name", with: new_name
+        fill_in "Block", with: new_block
         click_button submit
       end
 
       it { should have_selector 'title', text: full_title(new_name) }
       it { should have_css '.alert-success', text: "Updated" }
       specify { farm.reload.name.should == new_name }
+      specify { block.reload.name.should == new_block }
       
     end
   end

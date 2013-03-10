@@ -28,6 +28,8 @@ describe Farm do
     expect(farm).to be_valid
   end
 
+  it { should accept_nested_attributes_for :blocks }
+
   describe "tenant security" do
 
     it "should have only the current company's data" do
@@ -48,6 +50,7 @@ describe Farm do
 
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :company_id }
+      it { should     allow_mass_assignment_of :blocks_attributes }
     end
   end
 
