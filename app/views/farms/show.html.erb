@@ -2,18 +2,26 @@
 
 <h1><%= @farm.name %></h1>
 
-<ul class="blocks">
+<table>
+  <tr>
+    <th>Block</th>
+    <th>Field</th>
+  </tr>
+
   <% @farm.blocks.each do |block| %>
-    <li>
-      <%= block.name %>
-      <ul class="fields">
+    <tr>
+      <td><%= block.name %></td>
+    </tr>
+
         <% block.fields.each do |field| %>
-          <li><%= field.name %></li>
+          <tr>
+            <td></td>
+            <td><%= field.name %></td>
+          </tr>
         <% end %>
-      </ul>
-    </li>
   <% end %>
-</ul>
+</table>
+
 
 <%= link_to 'Edit', edit_farm_path(@farm) %> |
 <%= link_to 'Back to Farms', farms_path %>

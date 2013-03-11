@@ -31,8 +31,8 @@ describe "Farm" do
 
     it { should have_selector 'title', text: full_title(farm.name) }
     it { should have_selector 'h1', text: farm.name }
-    it { should have_selector 'li', text: block.name }
-    it { should have_selector 'li', text: field.name }
+    it { should have_selector 'td', text: block.name }
+    it { should have_selector 'td', text: field.name }
     it { should have_link 'Back to Farms', href: farms_path }
     it { should have_link 'Edit', href: edit_farm_path(farm) }
   end
