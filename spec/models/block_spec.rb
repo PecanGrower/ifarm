@@ -36,7 +36,7 @@ describe Block do
 
   describe "tenant security" do
     
-    it "should have on the current company's data" do
+    it "should have only the current company's data" do
       wrong_company = FactoryGirl.create(:company)
       Company.current_id = wrong_company.id
       parent = FactoryGirl.create(:farm)
