@@ -1,8 +1,10 @@
 <fieldset>
-  <%= f.label :name, "Block" %><br />
-  <%= f.text_field :name %><br />
+  <%= f.label :name, "Block" %>
+  <%= f.text_field :name %>
 
   <%= f.fields_for :fields do |builder| %>
     <%= render 'field_fields', f: builder %>
   <% end %>
+
+  <%= link_to_add_fields "Add Field", f, :fields %>
 </fieldset>

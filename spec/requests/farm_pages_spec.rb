@@ -63,6 +63,7 @@ describe "Farm" do
     it { should have_selector 'title', text: "Edit #{farm.name}" }
     it { should have_selector 'h1', text: "Edit #{farm.name}" }
     it { should have_link "Cancel", href: farm_path(farm) }
+    it { should have_link "Add Field" }
 
     context "with invalid information" do
       let(:new_name) { "" }
