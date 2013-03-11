@@ -38,14 +38,18 @@ describe "Farm" do
   end
 
   describe "new page" do
-    before { visit new_farm_path }
     let(:submit) { "Save" }
+    let(:new_farm) { "New Farm" }
+    let(:new_block) { "New Block" }
+    let(:new_field) { "New Field" }
+
+    before { visit new_farm_path }
 
     it { should have_selector 'title', text: full_title('Add Farm') }
     it { should have_selector 'h1', text: 'Add Farm' }
 
     it "should create a new farm" do
-      fill_in "Farm Name", with: "Farm #1"
+      fill_in "Farm Name", with: new_farm
       expect do
         click_button submit
         Company.current_id = user.company.id
@@ -63,6 +67,7 @@ describe "Farm" do
     it { should have_selector 'title', text: "Edit #{farm.name}" }
     it { should have_selector 'h1', text: "Edit #{farm.name}" }
     it { should have_link "Cancel", href: farm_path(farm) }
+    it { should have_link "Add Block" }
     it { should have_link "Add Field" }
 
     context "with invalid information" do
