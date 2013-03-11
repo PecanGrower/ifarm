@@ -70,5 +70,9 @@ describe Field do
     it { should validate_numericality_of :acreage }
     it { should validate_presence_of :block_id }
     it { should validate_presence_of :company_id }
+    it "should allow blank :acreage" do
+      field.acreage = ""
+      expect(field).to be_valid
+    end
   end
 end
