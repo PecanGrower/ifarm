@@ -22,6 +22,5 @@ class Block < ActiveRecord::Base
   validates :name, presence: true,
                     uniqueness: { scope: :farm_id },
                     length: { maximum: 10 }
-  validates :farm_id, presence: true
   validates :company_id, presence: true
 end

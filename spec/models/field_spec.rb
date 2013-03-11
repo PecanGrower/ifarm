@@ -68,7 +68,7 @@ describe Field do
     it { should validate_uniqueness_of(:name).scoped_to :block_id }
     it { should ensure_length_of(:name).is_at_most 10 }
     it { should validate_numericality_of :acreage }
-    it { should validate_presence_of :block_id }
+    it { should_not validate_presence_of :block_id }
     it { should validate_presence_of :company_id }
     it "should allow blank :acreage" do
       field.acreage = ""

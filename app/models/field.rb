@@ -22,7 +22,6 @@ class Field < ActiveRecord::Base
                    uniqueness: { scope: :block_id },
                    length: { maximum: 10 }
   validates :acreage, numericality: true, allow_nil: true
-  validates :block_id, presence: true
   validates :company_id, presence: true
 
 end
