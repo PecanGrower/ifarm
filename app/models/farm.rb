@@ -14,7 +14,7 @@ class Farm < ActiveRecord::Base
 
   default_scope { where(company_id: Company.current_id) }
 
-  has_many :blocks
+  has_many :blocks, order: "name"
   accepts_nested_attributes_for :blocks
 
   validates :name, presence: true,

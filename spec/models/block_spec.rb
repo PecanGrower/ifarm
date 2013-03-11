@@ -32,7 +32,6 @@ describe Block do
     expect(factory).to be_valid
   end
 
-  it { should accept_nested_attributes_for :fields }
 
   describe "tenant security" do
     
@@ -68,5 +67,18 @@ describe Block do
     it { should ensure_length_of(:name).is_at_most 10 }
     it { should_not validate_presence_of :farm_id }
     it { should validate_presence_of :company_id }
+  end
+
+  describe "association" do
+    it { should accept_nested_attributes_for :fields }
+
+    it "should return fields ordered by name" do
+      block.save
+      second = block.fields.create(name: "Inbetween")
+      third = block.fields.create(name: "Last")
+      first = block.fields.create(name: "First")
+      correct_order = [first, second, third]
+      expect(block.fields.all).to eq correct_order
+    end
   end
 end

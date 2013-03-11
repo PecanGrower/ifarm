@@ -28,7 +28,6 @@ describe Farm do
     expect(farm).to be_valid
   end
 
-  it { should accept_nested_attributes_for :blocks }
 
   describe "tenant security" do
 
@@ -59,5 +58,18 @@ describe Farm do
     it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
     it { should ensure_length_of(:name).is_at_most(50) }
     it { should validate_presence_of(:company_id) }
+  end
+
+  describe "associations" do
+    it { should accept_nested_attributes_for :blocks }
+ 
+    it "should return blocks ordered by name" do
+      farm.save
+      second = farm.blocks.create(name: "Inbetween")
+      third = farm.blocks.create(name: "Last")
+      first = farm.blocks.create(name: "First")
+      correct_order = [first, second, third]
+      expect(farm.blocks.all).to eq correct_order
+    end
   end
 end
