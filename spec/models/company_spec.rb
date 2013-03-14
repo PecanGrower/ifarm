@@ -21,6 +21,7 @@ describe Company do
 
   describe "attributes" do
     it { should have_db_column :name }
+    it { should respond_to :current_id }
 
     context "protected from mass assignment" do
       
