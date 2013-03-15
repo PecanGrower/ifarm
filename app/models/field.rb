@@ -15,6 +15,7 @@ class Field < ActiveRecord::Base
   attr_accessible :acreage, :name
 
   belongs_to :block
+  has_many :irrigations
 
   default_scope { where(company_id: Company.current_id) }
 

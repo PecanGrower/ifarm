@@ -25,4 +25,9 @@ FactoryGirl.define do
     acreage 9.8
     block
   end
+
+  factory :irrigation do
+    time Time.now
+    field
+  end
 end
