@@ -24,4 +24,8 @@ class Field < ActiveRecord::Base
   validates :acreage, numericality: true, allow_nil: true
   validates :company_id, presence: true
 
+  def name_with_block
+    block.name + "-" + name
+  end
+
 end

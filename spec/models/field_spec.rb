@@ -75,4 +75,12 @@ describe Field do
       expect(field).to be_valid
     end
   end
+
+  describe "methods" do
+    
+    it "should return correct name_with_block" do
+      block_field_name = block.name + "-" + field.name
+      expect(field.name_with_block).to eq block_field_name
+    end
+  end
 end
