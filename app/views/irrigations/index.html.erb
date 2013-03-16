@@ -1,1 +1,17 @@
 <% provide :title, 'Irrigations' %>
+
+<h1>Current Irrigations</h1>
+
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Last Irrigation</th>
+  </tr>
+
+  <% @irrigations.each do |irrigation| %>
+    <tr>
+      <td><%= irrigation.field.name_with_block %></td>
+      <td><%= irrigation.time.to_s %></td>
+    </tr>
+  <% end %>
+</table>
