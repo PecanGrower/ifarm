@@ -1,13 +1,29 @@
-<%= form_for @irrigation do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<table class="control-group">
+  <%= form_for @irrigation do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :field_id %>
-  <%= f.collection_select :field_id, Field.all.sort_by(&:name_with_block), 
-                                     :id, :name_with_block %>
+    <tr>
+      <th><%= f.label :field_id %></th>
+      <th><%= f.label :time %></th>
+    </tr>
 
-  <%= f.label :time %>
-  <%= f.text_field :time %>
+    <tr>
+      <td class="controls">
+        <%= f.collection_select :field_id, 
+                                Field.all.sort_by(&:name_with_block), 
+                                :id, :name_with_block %>
 
-  <%= f.submit "Save", class: "btn" %>
+      </td>
+      <td><%= f.text_field :time %></td>
+      <td><%= f.submit "Save", class: "btn" %></td>
+    </tr>
 
-<% end %>
+    
+
+    
+    
+
+    
+
+  <% end %>
+</table>
