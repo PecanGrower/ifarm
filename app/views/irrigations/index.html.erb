@@ -13,7 +13,7 @@
   <% @irrigations.each do |irrigation| %>
     <tr>
       <td><%= irrigation.field.name_with_block %></td>
-      <td><%= irrigation.time.to_s %></td>
+      <td><%= irrigation.time.to_s(:long) %></td>
     </tr>
   <% end %>
 </table>

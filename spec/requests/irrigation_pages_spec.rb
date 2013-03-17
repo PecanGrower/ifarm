@@ -15,17 +15,17 @@ describe "Irrigation" do
     describe "previous irrigations list" do
       let!(:irrigation) { FactoryGirl.create(:irrigation) }
       let!(:new_irrigation) do
-        FactoryGirl.create(:irrigation, time: irrigation.time + 1)
+        FactoryGirl.create(:irrigation, time: irrigation.time + 1.day)
       end
 
       before { visit irrigations_path }
         
       it { should have_selector 'title', text: full_title('Irrigations') }
       it { should have_selector 'h1', text: 'Current Irrigations' }
-      it { should have_selector 'td', text: irrigation.time.to_s }
+      it { should have_selector 'td', text: irrigation.time.to_s(:long) }
       it "should have the correct sort order" do
-        first_irrigation = page.body.index(irrigation.time.to_s)
-        second_irrigation = page.body.index(new_irrigation.time.to_s)
+        first_irrigation = page.body.index(irrigation.time.to_s(:long))
+        second_irrigation = page.body.index(new_irrigation.time.to_s(:long))
         expect(second_irrigation).to be < first_irrigation
       end
     end
