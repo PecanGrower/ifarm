@@ -62,6 +62,9 @@ describe "Irrigation" do
         end
 
         it { should have_selector 'td', text: '1-1' }
+        it "should parse using american_date" do
+          expect(page).to have_selector 'td', text: 'April 01, 2013 14:50'
+        end
 
       end
 
