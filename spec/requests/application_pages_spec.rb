@@ -30,6 +30,8 @@ describe "ApplicationPages" do
       expect(page).to have_selector 'title', text: full_title('Farms')
       click_link "Irrigations"
       expect(page).to have_selector 'title', text: full_title('Irrigations')
+      click_link "Irrigation"
+      expect(page).to have_selector 'title', text: full_title('Next Irrigation')
     end
   end
 end
