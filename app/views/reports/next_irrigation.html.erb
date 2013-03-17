@@ -1,1 +1,12 @@
 <% provide :title, "Next Irrigations" %>
+
+<table>
+  <tr>
+    <th>Last irrigation</th>
+  </tr>
+  <% @report.each do |irrigation| %>
+    <tr>
+      <td><%= irrigation.time.to_s(:long) %></td>
+    </tr>
+  <% end %>
+</table>

@@ -15,9 +15,21 @@ describe "ReportPages" do
    
    context "for Next Irrigations" do
      
-     before { visit report_path(:next_irrigation) }
+     before do
+       visit report_path(:next_irrigation)
+       Company.current_id = user.company.id
+     end
 
      it { should have_selector 'title', text: full_title('Next Irrigations') }
+
+     context "with data" do
+       
+       let!(:irrigation) { FactoryGirl.create(:irrigation) }
+
+       before { visit report_path(:next_irrigation) }
+
+       it { should have_selector 'td', text: irrigation.time.to_s(:long) }
+     end
    end
  end
 end

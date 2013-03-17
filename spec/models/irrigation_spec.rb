@@ -36,13 +36,23 @@ describe Irrigation do
     end
   end
 
-  describe "attributes" do
+  describe "attribute" do
     it { should have_db_column :time }
     it { should have_db_column :field_id }
     it { should have_db_column :company_id }
   end
 
-  describe "validations" do
+  describe "validation" do
     it { should validate_presence_of :time }
+  end
+
+  describe "method" do
+    
+    describe "next_irrigations" do
+      it "should include @irrigation" do
+        irrigation.save
+        expect(Irrigation.next_irrigations).to include(irrigation)
+      end
+    end
   end
 end
