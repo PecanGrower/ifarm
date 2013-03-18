@@ -15,7 +15,7 @@ class Field < ActiveRecord::Base
   attr_accessible :acreage, :name
 
   belongs_to :block
-  has_many :irrigations
+  has_many :irrigations, order: 'time'
 
   default_scope { where(company_id: Company.current_id) }
 
@@ -27,6 +27,16 @@ class Field < ActiveRecord::Base
 
   def name_with_block
     block.name + "-" + name
+  end
+
+  def self.current_irrigations
+    Field.all.map do |field|
+      if field.irrigations.last
+        field.irrigations.last
+      else
+        field.irrigations.new(time: Time.new(Time.now.year))
+      end
+    end
   end
 
 end

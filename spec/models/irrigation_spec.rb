@@ -48,11 +48,5 @@ describe Irrigation do
 
   describe "method" do
     
-    describe "next_irrigations" do
-      it "should include @irrigation" do
-        irrigation.save
-        expect(Irrigation.next_irrigations).to include(irrigation)
-      end
-    end
   end
 end
