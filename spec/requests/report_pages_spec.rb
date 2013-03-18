@@ -16,7 +16,7 @@ describe "ReportPages" do
    context "for Next Irrigations" do
      
      before do
-       visit report_path(:next_irrigation)
+       visit report_path(:next_irrigations)
        Company.current_id = user.company.id
      end
 
@@ -26,7 +26,7 @@ describe "ReportPages" do
        
        let!(:irrigation) { FactoryGirl.create(:irrigation) }
 
-       before { visit report_path(:next_irrigation) }
+       before { visit report_path(:next_irrigations) }
 
        it { should have_selector 'td', text: irrigation.time.to_s(:long) }
      end

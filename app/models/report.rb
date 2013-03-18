@@ -5,7 +5,7 @@ class Report < ActiveRecord::Base
     Report.send(name)
   end
 
-  def self.next_irrigation
+  def self.next_irrigations
     Irrigation.next_irrigations
   end
 end
