@@ -48,5 +48,11 @@ describe Irrigation do
 
   describe "method" do
     
+    describe ".next_irrigation" do
+      
+      it "should return a time" do
+        expect(irrigation.next_irrigation).to be_kind_of(Time)
+      end
+    end
   end
 end

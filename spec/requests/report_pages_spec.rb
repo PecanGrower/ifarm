@@ -25,10 +25,14 @@ describe "ReportPages" do
      context "with data" do
        
        let!(:irrigation) { FactoryGirl.create(:irrigation) }
+       let(:current_irrigation) { irrigation.time.to_s(:long) }
+       let(:next_irrigation) { irrigation.next_irrigation.to_s(:long) }
 
        before { visit report_path(:next_irrigations) }
 
-       it { should have_selector 'td', text: irrigation.time.to_s(:long) }
+       it { should have_selector 'td', text: irrigation.field.name_with_block }
+       it { should have_selector 'td', text: current_irrigation }
+       it { should have_selector 'td', text: next_irrigation }
      end
    end
  end

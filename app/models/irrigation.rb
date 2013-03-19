@@ -7,4 +7,8 @@ class Irrigation < ActiveRecord::Base
 
   validates :time, presence: true
 
+  def next_irrigation
+    time + 10.days
+  end
+
 end
