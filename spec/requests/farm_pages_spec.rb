@@ -13,13 +13,23 @@ describe "Farm" do
 
   describe "index page" do
 
-    let!(:farm) { FactoryGirl.create(:farm) }
+    context "without an exisiting farm" do
+      before { visit farms_path }
 
-    before { visit farms_path }
+      it { should have_selector 'title', text: full_title('Farm') }
+      it { should have_link('New Farm', href: new_farm_path) }
+    end
 
-    it { should have_selector 'title', text: full_title('Farm') }
-    it { should have_link farm.name, href: farm_path(farm) }
-    it { should have_link('New Farm', href: new_farm_path) }
+    context "with an exisiting farm" do
+
+      let!(:farm) { FactoryGirl.create(:farm) }
+
+      before { visit farms_path }
+
+      it { should have_selector 'title', text: full_title('Farm') }
+      it { should have_link farm.name, href: farm_path(farm) }
+      it { should_not have_link('New Farm', href: new_farm_path) }
+    end
   end
 
   describe "show page" do

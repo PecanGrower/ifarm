@@ -8,4 +8,4 @@
   </div>
 <% end %>
 
-<%= link_to 'New Farm', new_farm_path %>
+<%= link_to 'New Farm', new_farm_path if @farms.empty? %>
