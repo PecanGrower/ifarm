@@ -21,6 +21,7 @@ describe "ReportPages" do
      end
 
      it { should have_selector 'title', text: full_title('Next Irrigations') }
+     it { should have_selector 'h1', text: 'Irrigation Schedule' }
 
      context "with data" do
        
