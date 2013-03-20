@@ -30,6 +30,11 @@ class ApplicationController < ActionController::Base
 
     def sign_in(user)
       session[:remember_token] = user.remember_token
+      Farm.unscoped do
+        if user.company.farms.all.any?
+          session[:farm_id] = user.company.farms.order('id').first.id
+        end
+      end
       self.current_user = user
     end
 
@@ -55,6 +60,13 @@ class ApplicationController < ActionController::Base
     def current_user?(user)
       user == current_user
     end
+
+    # -------- current_farm methods ----------
+
+    def current_farm
+      Farm.find_by_id(session[:farm_id])
+    end
+    helper_method :current_farm
 
     # -------- Friendly Forwarding Methods ----------
 

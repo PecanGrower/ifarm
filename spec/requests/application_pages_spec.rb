@@ -21,9 +21,21 @@ describe "ApplicationPages" do
       it { should_not have_css '.sidebar-nav' }
     end
 
-    it "should display the company name" do
+    xit "should display the company name" do
       expect(page).to have_css('.sidebar-nav', text: user.company.name)
     end
+
+    context "when User has a farm" do
+      before do
+        click_link 'Sign out'
+        Company.current_id = user.company.id
+        @farm = FactoryGirl.create(:farm)
+        sign_in(user)
+      end
+      
+      it { should have_selector('h4', text: @farm.name) }
+    end
+
 
     it "should have the correct links" do
       click_link "Farms"

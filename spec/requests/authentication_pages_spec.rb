@@ -25,6 +25,8 @@ describe "Authentication" do
     context "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before do
+        Company.current_id = user.company.id
+        @farm = FactoryGirl.create(:farm)
         fill_in "Email",    with: user.email.upcase
         fill_in "Password", with: user.password
         click_button "Sign in"
