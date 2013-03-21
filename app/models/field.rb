@@ -35,7 +35,7 @@ class Field < ActiveRecord::Base
       if field.irrigations.last
         field.irrigations.last
       else
-        field.irrigations.new(time: Time.new(Time.zone.now.year))
+        field.irrigations.new(time: Time.new(Time.zone.now.year)+1.day)
       end
     end
   end
