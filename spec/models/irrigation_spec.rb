@@ -40,6 +40,10 @@ describe Irrigation do
     it { should have_db_column :time }
     it { should have_db_column :field_id }
     it { should have_db_column :company_id }
+    it { should have_db_column :farm_id}
+    it { should have_db_index :field_id }
+    it { should have_db_index :company_id }
+    it { should have_db_index :farm_id }
   end
 
   describe "validation" do

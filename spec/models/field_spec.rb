@@ -56,6 +56,7 @@ describe Field do
     it { should have_db_column :acreage }
     it { should have_db_column :block_id }
     it { should have_db_column :company_id }
+    it { should have_db_column :farm_id }
 
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :block_id }
