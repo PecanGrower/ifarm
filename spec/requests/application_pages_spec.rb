@@ -21,10 +21,6 @@ describe "ApplicationPages" do
       it { should_not have_css '.sidebar-nav' }
     end
 
-    xit "should display the company name" do
-      expect(page).to have_css('.sidebar-nav', text: user.company.name)
-    end
-
     context "when User has a farm" do
       before do
         click_link 'Sign out'
@@ -33,7 +29,7 @@ describe "ApplicationPages" do
         sign_in(user)
       end
       
-      it { should have_selector('h4', text: @farm.name) }
+      it { should have_css('.sidebar-nav', text: @farm.name) }
     end
 
 
