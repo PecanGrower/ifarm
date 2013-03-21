@@ -9,6 +9,7 @@
 #  company_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  farm_id    :integer
 #
 
 class Field < ActiveRecord::Base
