@@ -23,7 +23,19 @@ namespace :import do
       kc.attributes = row.to_hash
       kc.save!
     end
-  end  
+  end
+
+  desc "Import Current Et data from csv file"
+  task current_et: :environment do
+
+    file = "db/current_et.csv"
+
+    CSV.foreach(file, headers: true) do |row|
+      current_et = CurrentEt.find_by_doy(row["doy"]) || CurrentEt.new
+      current_et.attributes = row.to_hash
+      current_et.save!
+    end
+  end   
 end
 
 namespace :db do

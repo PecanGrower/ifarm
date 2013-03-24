@@ -8,3 +8,4 @@
 
 Rake::Task["import:et"].invoke
 Rake::Task["import:kc"].invoke
+Rake::Task["import:current_et"].invoke
