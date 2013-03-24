@@ -23,6 +23,7 @@ FactoryGirl.define do
   factory :field do
     sequence(:name) { |n| "Field #{n}" }
     acreage 9.8
+    soil_class_id 1
     block
   end
 

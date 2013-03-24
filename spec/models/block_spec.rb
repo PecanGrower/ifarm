@@ -74,9 +74,9 @@ describe Block do
 
     it "should return fields ordered by name" do
       block.save
-      second = block.fields.create(name: "Inbetween")
-      third = block.fields.create(name: "Last")
-      first = block.fields.create(name: "First")
+      second = block.fields.create(name: "Inbetween", soil_class_id: 1)
+      third = block.fields.create(name: "Last", soil_class_id: 1)
+      first = block.fields.create(name: "First", soil_class_id: 1)
       correct_order = [first, second, third]
       expect(block.fields.all).to eq correct_order
     end

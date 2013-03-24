@@ -17,7 +17,8 @@ require 'spec_helper'
 describe Field do
 
   valid_attributes = { name: "1",
-                       acreage: 10.5 }
+                       acreage: 10.5,
+                       soil_class_id: 1 }
   let(:company) { FactoryGirl.create(:company) } 
   let(:block) { FactoryGirl.create(:block) }                      
   let(:field) { block.fields.build(valid_attributes) }
@@ -63,6 +64,7 @@ describe Field do
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :block_id }
       it { should_not allow_mass_assignment_of :company_id }
+      it { should allow_mass_assignment_of :soil_class_id }
     end
   end
 
@@ -73,6 +75,7 @@ describe Field do
     it { should validate_numericality_of :acreage }
     it { should_not validate_presence_of :block_id }
     it { should validate_presence_of :company_id }
+    it { should validate_presence_of :soil_class_id }
     it "should allow blank :acreage" do
       field.acreage = ""
       expect(field).to be_valid

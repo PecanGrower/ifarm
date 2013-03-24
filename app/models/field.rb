@@ -13,7 +13,7 @@
 #
 
 class Field < ActiveRecord::Base
-  attr_accessible :acreage, :name
+  attr_accessible :acreage, :name, :soil_class_id
 
   belongs_to :block
   belongs_to :soil_class
@@ -26,6 +26,7 @@ class Field < ActiveRecord::Base
                    length: { maximum: 10 }
   validates :acreage, numericality: true, allow_nil: true
   validates :company_id, presence: true
+  validates :soil_class_id, presence: true
 
   def name_with_block
     block.name + "-" + name
@@ -40,5 +41,4 @@ class Field < ActiveRecord::Base
       end
     end
   end
-
 end
