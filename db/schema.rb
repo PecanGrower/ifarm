@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323165047) do
+ActiveRecord::Schema.define(:version => 20130324073631) do
 
   create_table "blocks", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(:version => 20130323165047) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "current_ets", :force => true do |t|
+    t.integer  "doy"
+    t.decimal  "fabian_garcia"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "current_ets", ["doy"], :name => "index_current_ets_on_doy"
 
   create_table "ets", :force => true do |t|
     t.integer  "doy"
