@@ -21,9 +21,9 @@ class Irrigation < ActiveRecord::Base
   validates :time, presence: true
 
   def next_irrigation
-    aw = 7.0
+    max_aw = field.soil_class.aw
     mad = 0.45
-    aw = aw * mad
+    aw = max_aw * mad
     interval = 0
     doy = time.yday
     et = Et.order("doy")
