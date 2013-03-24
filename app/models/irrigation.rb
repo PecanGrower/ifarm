@@ -21,14 +21,18 @@ class Irrigation < ActiveRecord::Base
   validates :time, presence: true
 
   def next_irrigation
-    d = time.yday
-    t5 = (d ** 5) *  0.00000000081405
-    t4 = (d ** 4) * -0.00000064165
-    t3 = (d ** 3) *  0.00018096
-    t2 = (d ** 2) * -0.019768
-    t1 = (d ** 1) * 0.23585
-    t0 = (d ** 0) * 72.258
-    interval = t5 + t4 + t3 + t2 + t1 + t0
+    aw = 3.0
+    interval = 0
+    doy = time.yday
+    et = Et.order("doy")
+    kc = Kc.order("doy")
+    while aw > 0
+      etref = et[doy-1].fabian_garcia
+      kcref = kc[doy-1].pecan
+      aw -= etref * kcref
+      doy += 1
+      interval += 1
+    end
     time + interval.days
   end
 
