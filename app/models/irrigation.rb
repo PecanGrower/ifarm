@@ -26,8 +26,9 @@ class Irrigation < ActiveRecord::Base
     doy = time.yday
     et = Et.order("doy")
     kc = Kc.order("doy")
+    current_et = CurrentEt.order("doy")
     while aw > 0
-      etref = et[doy-1].fabian_garcia
+      etref = current_et[doy-1].fabian_garcia || et[doy-1].fabian_garcia
       kcref = kc[doy-1].pecan
       aw -= etref * kcref
       doy += 1
@@ -35,5 +36,4 @@ class Irrigation < ActiveRecord::Base
     end
     time.to_date + interval.days
   end
-
 end
