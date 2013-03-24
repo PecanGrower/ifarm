@@ -35,6 +35,18 @@ namespace :import do
       current_et.attributes = row.to_hash
       current_et.save!
     end
+  end
+
+  desc "Import Current Et data from csv file"
+  task soil_class: :environment do
+
+    file = "db/soil_class.csv"
+
+    CSV.foreach(file, headers: true) do |row|
+      soil_class = SoilClass.find_by_name(row["name"]) || SoilClass.new
+      soil_class.attributes = row.to_hash
+      soil_class.save!
+    end
   end   
 end
 

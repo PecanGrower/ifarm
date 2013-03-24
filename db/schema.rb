@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324073631) do
+ActiveRecord::Schema.define(:version => 20130324084212) do
 
   create_table "blocks", :force => true do |t|
     t.string   "name"
@@ -92,6 +92,13 @@ ActiveRecord::Schema.define(:version => 20130324073631) do
   end
 
   add_index "kcs", ["doy"], :name => "index_kcs_on_doy"
+
+  create_table "soil_classes", :force => true do |t|
+    t.string   "name"
+    t.decimal  "aw"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
