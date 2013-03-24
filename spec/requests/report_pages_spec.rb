@@ -26,7 +26,7 @@ describe "ReportPages" do
      context "with data" do
        
        let!(:irrigation) { FactoryGirl.create(:irrigation) }
-       let(:current_irrigation) { irrigation.time.to_s(:long) }
+       let(:current_irrigation) { irrigation.time.to_date.to_s(:long) }
        let(:next_irrigation) { irrigation.next_irrigation.to_s(:long) }
 
        before { visit report_path(:next_irrigations) }

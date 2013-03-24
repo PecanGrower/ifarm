@@ -2,7 +2,7 @@
 
 <h1>Irrigation Schedule</h1>
 
-<table>
+<table border = "1">
   <tr>
     <th>Field</th>
     <th>Last irrigation</th>
@@ -11,8 +11,8 @@
   <% @report.each do |irrigation| %>
     <tr>
       <td><%= irrigation.field.name_with_block %></td>
-      <td><%= irrigation.time.to_s(:long) %></td>
       <td><%= irrigation.next_irrigation.to_s(:long) %></td>
+      <td><%= irrigation.time.to_date.to_s(:long) %></td>
     </tr>
   <% end %>
 </table>
