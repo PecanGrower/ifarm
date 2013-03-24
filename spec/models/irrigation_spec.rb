@@ -68,7 +68,7 @@ describe Irrigation do
     describe ".next_irrigation" do
       
       it "should return a time" do
-        expect(irrigation.next_irrigation).to be_kind_of(Time)
+        expect(irrigation.next_irrigation).to be_kind_of(Date)
       end
     end
   end

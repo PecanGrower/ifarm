@@ -33,7 +33,7 @@ class Irrigation < ActiveRecord::Base
       doy += 1
       interval += 1
     end
-    time + interval.days
+    time.to_date + interval.days
   end
 
 end
