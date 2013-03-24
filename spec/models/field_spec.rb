@@ -58,6 +58,7 @@ describe Field do
     it { should have_db_column :block_id }
     it { should have_db_column :company_id }
     it { should have_db_column :farm_id }
+    it { should have_db_column :soil_class_id }
 
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :block_id }
@@ -76,6 +77,12 @@ describe Field do
       field.acreage = ""
       expect(field).to be_valid
     end
+  end
+
+  describe "relationships" do
+    it { should belong_to :block }
+    it { should have_many :irrigations }
+    it { should belong_to :soil_class }
   end
 
   describe "method" do

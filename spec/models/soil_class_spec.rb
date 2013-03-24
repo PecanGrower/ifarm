@@ -5,8 +5,12 @@ describe SoilClass do
 
   subject { soil_class }
 
-  describe "attributes" do
+  describe "attribute" do
     it { should have_db_column :name }
     it { should have_db_column :aw }
+  end
+
+  describe "relationship" do
+    it { should have_many :fields }
   end
 end

@@ -16,6 +16,7 @@ class Field < ActiveRecord::Base
   attr_accessible :acreage, :name
 
   belongs_to :block
+  belongs_to :soil_class
   has_many :irrigations, order: 'time'
 
   default_scope { where(company_id: Company.current_id) }
