@@ -6,6 +6,7 @@
   <tr>
     <th>Block</th>
     <th>Field</th>
+    <th>Soil Type</th>
   </tr>
 
   <% @farm.blocks.each do |block| %>
@@ -17,6 +18,7 @@
           <tr>
             <td></td>
             <td><%= field.name %></td>
+            <td><%= field.soil_class.name %></td>
           </tr>
         <% end %>
   <% end %>

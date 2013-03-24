@@ -43,6 +43,7 @@ describe "Farm" do
     it { should have_selector 'h1', text: farm.name }
     it { should have_selector 'td', text: block.name }
     it { should have_selector 'td', text: field.name }
+    it { should have_selector 'td', text: field.soil_class.name }
     it { should have_link 'Back to Farms', href: farms_path }
     it { should have_link 'Edit', href: edit_farm_path(farm) }
   end
@@ -101,6 +102,7 @@ describe "Farm" do
         fill_in "Farm Name", with: new_name
         fill_in "Block", with: new_block
         fill_in "Field", with: new_field
+        select('Sand', from: 'Soil Type')
         click_button submit
       end
 

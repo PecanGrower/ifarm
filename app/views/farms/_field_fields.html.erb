@@ -3,7 +3,14 @@
     <%= f.label :name, "Field", class: 'control-label' %>
     <div class="controls">
       <%= f.text_field :name %>
-    </div>    
+    </div>
+
+    <%= f.label :soil_class_id, "Soil Type", class: 'control-label' %>    
+    <div class="controls">
+      <%= f.collection_select :soil_class_id,
+                              SoilClass.order("aw"),
+                              :id, :name %>
+    </div>
   </div>
 
 </fieldset>
