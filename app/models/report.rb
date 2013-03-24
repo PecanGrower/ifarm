@@ -6,6 +6,6 @@ class Report < ActiveRecord::Base
   end
 
   def self.next_irrigations
-    Field.current_irrigations.sort_by(&:next_irrigation)
+    Irrigation.next_irrigations.sort_by(&:next_irrigation)
   end
 end

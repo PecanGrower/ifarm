@@ -13,6 +13,7 @@
 
 class Irrigation < ActiveRecord::Base
   attr_accessible :time
+  attr_accessor :next_irrigation
 
   belongs_to :field
 
@@ -20,18 +21,31 @@ class Irrigation < ActiveRecord::Base
 
   validates :time, presence: true
 
-  def next_irrigation
+  def self.next_irrigations
+    current_irrigations = Field.includes(:irrigations).map do |field|
+      if field.irrigations.last
+        field.irrigations.last
+      else
+        field.irrigations.new(time: Time.new(Time.zone.now.year)-184.days)
+      end
+    end
+    et ||= Et.order("doy")
+    kc ||= Kc.order("doy")
+    current_et ||= CurrentEt.order("doy")
+    current_irrigations.each do |irrigation|
+      irrigation.next_irrigation = irrigation.next_irrigation_date(et, kc, current_et)
+    end
+  end
+
+  def next_irrigation_date(et, kc, current_et)
     max_aw = field.soil_class.aw
     mad = 0.45
     aw = max_aw * mad
     interval = 0
     doy = time.yday
-    @et ||= Et.order("doy")
-    @kc ||= Kc.order("doy")
-    @current_et ||= CurrentEt.order("doy")
     while aw > 0
-      etref = @current_et[doy-1].fabian_garcia || @et[doy-1].fabian_garcia
-      kcref = @kc[doy-1].pecan
+      etref = current_et[doy-1].fabian_garcia || et[doy-1].fabian_garcia
+      kcref = kc[doy-1].pecan
       aw -= etref * kcref
       doy += 1
       interval += 1

@@ -97,41 +97,5 @@ describe Field do
         expect(field.name_with_block).to eq block_field_name
       end
     end
-
-    context "self.current_irrigations" do
-      
-      it "should return an object for each field" do
-        field.save
-        FactoryGirl.create(:field)
-        expect(Field.current_irrigations.count).to eq 2
-      end
-
-      it "should return an irrigation object" do
-        field.save
-        FactoryGirl.create(:irrigation, field: field)
-        expect(Field.current_irrigations.first).to be_kind_of(Irrigation)
-      end
-
-      it "should return an irrigation object when field has no irrigations" do
-        field.save
-        expect(Field.current_irrigations.first).to be_kind_of(Irrigation)
-      end
-
-      it "should return only one irrigation per field" do
-        field.save
-        FactoryGirl.create(:irrigation, field: field, time: 1.day.ago)
-        FactoryGirl.create(:irrigation, field: field, time: 2.days.ago)
-        expect(Field.current_irrigations.count).to eq 1
-      end
-
-      it "should return the most recent irrigation" do
-        field.save
-        last_irrigation = FactoryGirl.create(:irrigation, 
-                                              field: field, 
-                                              time: 1.day.ago)
-        FactoryGirl.create(:irrigation, field: field, time: 2.days.ago)
-        expect(Field.current_irrigations.first).to eq last_irrigation
-      end
-    end
   end
 end

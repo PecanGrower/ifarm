@@ -64,11 +64,19 @@ describe Irrigation do
   end
 
   describe "method" do
+
+    describe "self.next_irrigations" do
+      let(:next_irrigations) { Irrigation.next_irrigations }
+      before { irrigation.save }
+      
+      specify { next_irrigations.should be_kind_of(Array) }
+      specify { next_irrigations.first.should be_kind_of(Irrigation) }
+    end
     
-    describe ".next_irrigation" do
+    describe ".next_irrigation_date" do
       
       it "should return a time" do
-        expect(irrigation.next_irrigation).to be_kind_of(Date)
+        expect(irrigation.next_irrigation_date(Et.all, Kc.all, CurrentEt.all)).to be_kind_of(Date)
       end
     end
   end

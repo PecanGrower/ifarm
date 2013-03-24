@@ -31,14 +31,4 @@ class Field < ActiveRecord::Base
   def name_with_block
     block.name + "-" + name
   end
-
-  def self.current_irrigations
-    Field.all.map do |field|
-      if field.irrigations.last
-        field.irrigations.last
-      else
-        field.irrigations.new(time: Time.new(Time.zone.now.year)+1.day)
-      end
-    end
-  end
 end
