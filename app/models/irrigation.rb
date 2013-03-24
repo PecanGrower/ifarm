@@ -26,12 +26,12 @@ class Irrigation < ActiveRecord::Base
     aw = max_aw * mad
     interval = 0
     doy = time.yday
-    et = Et.order("doy")
-    kc = Kc.order("doy")
-    current_et = CurrentEt.order("doy")
+    @et ||= Et.order("doy")
+    @kc ||= Kc.order("doy")
+    @current_et ||= CurrentEt.order("doy")
     while aw > 0
-      etref = current_et[doy-1].fabian_garcia || et[doy-1].fabian_garcia
-      kcref = kc[doy-1].pecan
+      etref = @current_et[doy-1].fabian_garcia || @et[doy-1].fabian_garcia
+      kcref = @kc[doy-1].pecan
       aw -= etref * kcref
       doy += 1
       interval += 1
