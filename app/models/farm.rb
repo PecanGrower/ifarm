@@ -10,7 +10,7 @@
 #
 
 class Farm < ActiveRecord::Base
-  attr_accessible :name, :blocks_attributes
+  attr_accessible :name, :weather_station_id, :blocks_attributes
 
   default_scope { where(company_id: Company.current_id) }
 
@@ -22,4 +22,5 @@ class Farm < ActiveRecord::Base
                     uniqueness: { scope: :company_id },
                     length: { maximum: 50 }
   validates :company_id, presence: true
+  validates :weather_station_id, presence: true
 end

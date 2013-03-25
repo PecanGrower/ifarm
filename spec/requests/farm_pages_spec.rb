@@ -61,6 +61,7 @@ describe "Farm" do
 
     it "should create a new farm" do
       fill_in "Farm Name", with: new_farm
+      select('Fabian Garcia Research Center', from: 'Weather Station')
       expect do
         click_button submit
         Company.current_id = user.company.id

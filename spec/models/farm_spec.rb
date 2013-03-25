@@ -12,10 +12,15 @@
 require 'spec_helper'
 
 describe Farm do
-  
-  valid_attributes = { name: "North Farm" }
+
+  valid_attributes = FactoryGirl.attributes_for(:farm, weather_station_id: WeatherStation.first.id)
+
   let(:company) { FactoryGirl.create(Company) }
+  # let(:weather_station) { create(:weather_station) }
   let(:farm) { Farm.new(valid_attributes) }
+  
+
+
 
   subject { farm }
 
@@ -34,7 +39,7 @@ describe Farm do
     it "should have only the current company's data" do
       wrong_company = FactoryGirl.create(:company)
       Company.current_id = wrong_company.id
-      child = Farm.create(name: valid_attributes)
+      child = Farm.create(valid_attributes)
       expect(child).to be_valid
       Company.current_id = company.id
       farm.save
@@ -59,6 +64,7 @@ describe Farm do
     it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
     it { should ensure_length_of(:name).is_at_most(50) }
     it { should validate_presence_of(:company_id) }
+    it { should validate_presence_of(:weather_station_id) }
   end
 
   describe "associations" do

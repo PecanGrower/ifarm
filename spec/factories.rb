@@ -13,6 +13,7 @@ FactoryGirl.define do
 
   factory :farm do
     sequence(:name) { |n| "Farm #{n}" }
+    weather_station_id 1
   end
 
   factory :block do

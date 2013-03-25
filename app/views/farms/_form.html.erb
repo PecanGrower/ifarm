@@ -6,6 +6,14 @@
     <%= f.text_field :name %>
   </div>
 
+  <%= f.label :weather_station_id, "Weather Station", 
+                                    class: 'control-label' %>
+  <div class="controls">
+    <%= f.collection_select :weather_station_id,
+                            WeatherStation.order("name"),
+                            :id, :name %>
+  </div>
+
   <%= f.fields_for :blocks do |builder| %>
     <%= render 'block_fields', f: builder %>
   <% end %>

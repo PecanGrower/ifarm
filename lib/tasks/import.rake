@@ -57,35 +57,39 @@ namespace :import do
     end_date = end_date.strftime("%F")
     start_date = Time.now-180.days
     start_date = start_date.strftime("%F")
-    station = "nmcc-da-1"
+
+    WeatherStation.all.each do |station|
+      station_id = station.id_code
 
 
-    url = "http://weather.nmsu.edu/climate/ws/data/#{station}/#{start_date}/0/#{end_date}/0/temperature/0/relative/humidity/0/wind/data/0/precipitation/0/solar/radiation/0/soil/temperature/0/reference/et/1/daily/units/0/qc/0/csv"
+      url = "http://weather.nmsu.edu/climate/ws/data/#{station_id}/#{start_date}/0/#{end_date}/0/temperature/0/relative/humidity/0/wind/data/0/precipitation/0/solar/radiation/0/soil/temperature/0/reference/et/1/daily/units/0/qc/0/csv"
 
-    open(url) do |f|
-      CSV.parse(f, headers: true) do |row|
-        if row[0]
-          @doy = row[0].to_date.yday
-          current_et = CurrentEt.find_by_doy(@doy)
-          current_et.fabian_garcia = row[2]
-          current_et.save!
+      open(url) do |f|
+        CSV.parse(f, headers: true) do |row|
+          if row[0]
+            @doy = row[0].to_date.yday
+            current_et = CurrentEt.find_by_doy(@doy)
+            current_et[station.db_col] = row[2]
+            current_et.save!
+          end
         end
       end
+
+      185.times do
+        @doy += 1
+        current_et = CurrentEt.find_by_doy(@doy)
+        current_et[station.db_col] = nil
+        current_et.save!
+      end
     end
+  end
 
-    185.times do
-      @doy += 1
-      current_et = CurrentEt.find_by_doy(@doy)
-      current_et.fabian_garcia = nil
-      current_et.save!
-    end
-
-    # file = open(url)
-
-    # CSV.foreach(file, headers: true) do |row|
-    #   puts row[0]
-    #   puts row[2]
-    # end
+  desc "Add initial weather station"
+  task initial_weather_station: :environment do
+    attr = { name: "Fabian Garcia Research Center",
+             id_code: "nmcc-da-1",
+             db_col: "fabian_garcia" }
+    WeatherStation.create(attr) if WeatherStation.all.empty?
   end     
 end
 
