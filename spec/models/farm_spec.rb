@@ -46,6 +46,7 @@ describe Farm do
   describe "attributes" do
     it { should have_db_column :name }
     it { should have_db_column :company_id }
+    it { should have_db_column :weather_station_id }
 
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :company_id }
@@ -62,6 +63,7 @@ describe Farm do
 
   describe "associations" do
     it { should accept_nested_attributes_for :blocks }
+    it { should belong_to :weather_station }
  
     it "should return blocks ordered by name" do
       farm.save

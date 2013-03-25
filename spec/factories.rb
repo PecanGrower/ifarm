@@ -31,4 +31,10 @@ FactoryGirl.define do
     time Time.now
     field
   end
+
+  factory :weather_station do
+    sequence(:name) { |n| "Station #{n}" }
+    sequence(:db_col) { |n| "station_#{n}" }
+    sequence(:id_code) { |n| "nmcc-da-#{n}" }
+  end
 end
