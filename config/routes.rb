@@ -4,7 +4,7 @@ Ifarm::Application.routes.draw do
   resources :companies, only: [:create, :show]
   resources :users, only: [:edit, :update]
   resources :farms, only: [:index, :show, :new, :create, :edit, :update]
-  resources :irrigations, only: [:index, :create]
+  resources :irrigations, only: [:index, :create, :edit]
   resources :reports, only: [:show]
 
   root to: 'static_pages#home'

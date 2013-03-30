@@ -25,10 +25,11 @@ describe "Irrigation" do
       it { should have_selector 'h1', text: 'Current Irrigations' }
       it { should have_selector 'td', text: field_name }
       it { should have_selector 'td', text: irrigation.time.to_s(:long) }
+      it { should have_link 'edit', href: edit_irrigation_path(irrigation) }
       it "should have the correct sort order" do
-        first = page.body.index(irrigation.time.to_s(:long))
-        second = page.body.index(new_irrigation.time.to_s(:long))
-        expect(second).to be < first
+        first_irrigation = page.body.index(irrigation.time.to_s(:long))
+        second_irrigation = page.body.index(new_irrigation.time.to_s(:long))
+        expect(second_irrigation).to be < first_irrigation
       end
     end
 
