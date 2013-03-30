@@ -15,4 +15,10 @@ class IrrigationsController < ApplicationController
       render :index
     end
   end
+
+  def edit
+    @irrigations = Irrigation.order("time DESC")
+    @irrigation = Irrigation.find(params[:id])
+    render :index
+  end
 end

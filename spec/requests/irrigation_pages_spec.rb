@@ -18,6 +18,7 @@ describe "Irrigation" do
         FactoryGirl.create(:irrigation, time: irrigation.time + 1.day)
       end
       let(:field_name) { irrigation.field.name_with_block }
+      let(:time) { irrigation.time.to_s(:long) }
 
       before { visit irrigations_path }
         
@@ -30,6 +31,11 @@ describe "Irrigation" do
         first_irrigation = page.body.index(irrigation.time.to_s(:long))
         second_irrigation = page.body.index(new_irrigation.time.to_s(:long))
         expect(second_irrigation).to be < first_irrigation
+      end
+      it "should have a link to the edit page" do
+        Company.current_id = user.company.id
+        click_link 'edit'
+        expect(page).to have_selector 'input', value: time
       end
     end
 
