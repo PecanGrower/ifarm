@@ -36,12 +36,6 @@ describe "ReportPages" do
         it { should have_selector 'td', text: irrigation.field.name_with_block }
         it { should have_selector 'td', text: current_irrigation }
         it { should have_selector 'td', text: next_irrigation }
-
-        it "should not take forever to load" do
-          Company.current_id = user.company.id
-          100.times { FactoryGirl.create(:irrigation) }
-          1.times { visit report_path(:next_irrigations) }
-        end
       end
     end
   end
