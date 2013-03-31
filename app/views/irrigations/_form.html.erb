@@ -14,7 +14,9 @@
                                 :id, :name_with_block %>
 
       </td>
-      <td><%= f.text_field :time %></td>
+      <td>
+        <%= f.text_field :time, value: @update_time %>
+      </td>
       <td><%= f.submit "Save", class: "btn btn-primary" %></td>
     </tr>
   <% end %>

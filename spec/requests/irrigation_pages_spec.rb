@@ -76,7 +76,39 @@ describe "Irrigation" do
         end
 
       end
-
     end
-  end  
+  end
+
+  describe "edit page" do
+    let(:irrigation) { Irrigation.first }
+    let(:time) { "4/1/2013 14:50" }
+    before do
+      FactoryGirl.create(:irrigation)
+      visit edit_irrigation_path(irrigation)
+      Company.current_id = user.company.id
+    end
+
+    context "with valid data" do
+
+      it "should update the irrigation" do
+        fill_in 'Time', with: time
+        click_button 'Save'
+        expect(page).to have_selector 'td', text: time.to_time.to_s(:long)
+      end
+
+      it "should display a success message" do
+        click_button 'Save'
+        expect(page).to have_css '.alert-success'
+      end
+    end
+
+    context "with invalid data" do
+
+      it "should have error message" do
+        fill_in 'Time', with: ""
+        click_button 'Save'
+        expect(page).to have_css '.alert-error'
+      end
+    end
+  end 
 end
