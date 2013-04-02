@@ -81,8 +81,10 @@ describe "StaticPages" do
         # should have_selector 'title', text: full_title('Edit farms')
         click_link "Company"
         should have_selector 'title', text: full_title(user.company.name)
-        click_link "Settings"
+        click_link "Edit User"
         should have_selector 'title', text: full_title('Edit login')
+        click_link "Add User"
+        should have_selector 'title', text: full_title('Add User')
         click_link "Home"
         should have_selector 'title', text: full_title('')
         click_link "About"

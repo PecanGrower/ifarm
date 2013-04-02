@@ -22,6 +22,60 @@ describe "UserPages" do
     
   end
 
+  describe "new" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:attr) { FactoryGirl.attributes_for(:user) }
+    before do
+      sign_in user
+      visit new_user_path
+      Company.current_id = user.company.id
+    end
+
+    context "with invalid information" do
+      before do
+        fill_in "Email", with: ""
+        fill_in "Password", with: ""
+        fill_in "Confirmation", with: ""        
+      end
+
+      it "should not create a user" do
+        expect  do
+          click_button "Add User"
+        end.not_to change(User, :count)
+      end
+
+      it "should display error messages" do
+        click_button "Add User"
+        expect(page).to have_css '.alert-error'
+      end
+    end
+
+    context "with valid information" do
+      before do
+        fill_in "Email", with: attr[:email]
+        fill_in "Password", with: attr[:password]
+        fill_in "Confirmation", with: attr[:password]
+      end
+
+      it "should create a new user" do
+        expect do
+          click_button "Add User"
+        end.to change(User, :count).by(1)
+      end
+
+      it "should create a user for the correct company" do
+        click_button "Add User"
+        new_user = User.find_by_email(attr[:email])
+        expect(new_user.company_id).to eq user.company_id
+      end
+
+      it "should have a success message" do
+        click_button "Add User"
+        expect(page).to have_css '.alert-success'
+      end
+    end
+  end
+
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
