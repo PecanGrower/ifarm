@@ -25,7 +25,7 @@ FactoryGirl.define do
   factory :irrigation_well do
     sequence(:name) { |n| "Pump #{n}" }
     sequence(:pod_code) { |n| "lrg-#{12345+n}-pod1" }
-    # farm
+    farm
   end
 
   factory :block do
