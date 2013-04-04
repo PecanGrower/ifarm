@@ -103,7 +103,7 @@ describe "Farm" do
         fill_in "Farm Name", with: new_name
         fill_in "Block", with: new_block
         fill_in "Field", with: new_field
-        select('Sand', from: 'Soil Type')
+        select('6-8cm', from: 'Soil Type')
         click_button submit
       end
 
@@ -112,7 +112,6 @@ describe "Farm" do
       specify { farm.reload.name.should == new_name }
       specify { block.reload.name.should == new_block }
       specify { field.reload.name.should == new_field }
-      
     end
   end
 end

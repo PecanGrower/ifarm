@@ -4,6 +4,12 @@ FactoryGirl.define do
     sequence(:name) { |n| "Company #{n}" }
   end
 
+  factory :weather_station do
+    sequence(:name) { |n| "Station #{n}" }
+    sequence(:db_col) { |n| "station_#{n}" }
+    sequence(:id_code) { |n| "nmcc-da-#{n}" }
+  end
+
   factory :user do
     sequence(:email) { |n| "User_#{n}@Example.com" }
     password "foobar"
@@ -14,6 +20,12 @@ FactoryGirl.define do
   factory :farm do
     sequence(:name) { |n| "Farm #{n}" }
     weather_station_id 1
+  end
+
+  factory :irrigation_well do
+    sequence(:name) { |n| "Pump #{n}" }
+    sequence(:pod_code) { |n| "lrg-#{12345+n}-pod1" }
+    # farm
   end
 
   factory :block do
@@ -33,9 +45,5 @@ FactoryGirl.define do
     field
   end
 
-  factory :weather_station do
-    sequence(:name) { |n| "Station #{n}" }
-    sequence(:db_col) { |n| "station_#{n}" }
-    sequence(:id_code) { |n| "nmcc-da-#{n}" }
-  end
+
 end
