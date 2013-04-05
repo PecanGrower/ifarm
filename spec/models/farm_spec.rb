@@ -69,6 +69,7 @@ describe Farm do
 
   describe "associations" do
     it { should accept_nested_attributes_for :blocks }
+    it { should accept_nested_attributes_for :irrigation_wells }
     it { should belong_to :weather_station }
  
     it "should return blocks ordered by name" do
@@ -78,6 +79,15 @@ describe Farm do
       first = farm.blocks.create(name: "First")
       correct_order = [first, second, third]
       expect(farm.blocks.all).to eq correct_order
+    end
+
+    it "should return irrigation_wells ordered by name" do
+      farm.save
+      second = farm.irrigation_wells.create(name: "Inbetween")
+      third = farm.irrigation_wells.create(name: "Last")
+      first = farm.irrigation_wells.create(name: "First")
+      correct_order = [first, second, third]
+      expect(farm.irrigation_wells.all).to eq correct_order
     end
   end
 end

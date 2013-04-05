@@ -15,9 +15,10 @@ class Farm < ActiveRecord::Base
   default_scope { where(company_id: Company.current_id) }
 
   has_many :blocks, order: "name"
-  has_many :irrigation_wells
+  has_many :irrigation_wells, order: "name"
   belongs_to :weather_station
   accepts_nested_attributes_for :blocks
+  accepts_nested_attributes_for :irrigation_wells
 
   validates :name, presence: true,
                     uniqueness: { scope: :company_id },
