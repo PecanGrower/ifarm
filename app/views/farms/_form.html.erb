@@ -14,6 +14,12 @@
                             :id, :name %>
   </div>
 
+  <%= f.fields_for :irrigation_wells do |builder| %>
+    <%= render 'irrigation_well_fields', f: builder %>
+  <% end %>
+
+  <%= link_to_add_fields "Add Irrigation Well", f, :irrigation_wells %>
+
   <%= f.fields_for :blocks do |builder| %>
     <%= render 'block_fields', f: builder %>
   <% end %>

@@ -56,6 +56,7 @@ describe Farm do
     context "protected from mass assignment" do
       it { should_not allow_mass_assignment_of :company_id }
       it { should     allow_mass_assignment_of :blocks_attributes }
+      it { should allow_mass_assignment_of :irrigation_wells_attributes }
     end
   end
 

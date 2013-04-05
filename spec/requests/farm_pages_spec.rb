@@ -73,6 +73,7 @@ describe "Farm" do
     let!(:farm) { FactoryGirl.create(:farm) }
     let!(:block) { FactoryGirl.create(:block, farm: farm) }
     let!(:field) { FactoryGirl.create(:field, block: block) }
+    let!(:well) { FactoryGirl.create(:irrigation_well, farm: farm) }
 
     before { visit edit_farm_path(farm) }
 
@@ -98,9 +99,13 @@ describe "Farm" do
       let(:new_name) { "New Name" }
       let(:new_block) { "New Block" }
       let(:new_field) { "New Field" }
+      let(:new_well) { "New Well" }
+      let(:new_pod_code) { "New Pod Code" }
       let(:submit) { "Save" }
       before do
         fill_in "Farm Name", with: new_name
+        fill_in "Irrigation Well Name", with: new_well
+        fill_in "POD Code", with: new_pod_code
         fill_in "Block", with: new_block
         fill_in "Field", with: new_field
         select('6-8cm', from: 'Soil Type')
@@ -112,6 +117,8 @@ describe "Farm" do
       specify { farm.reload.name.should == new_name }
       specify { block.reload.name.should == new_block }
       specify { field.reload.name.should == new_field }
+      specify { well.reload.name.should == new_well }
+      specify { well.reload.pod_code.should == new_pod_code }
     end
   end
 end

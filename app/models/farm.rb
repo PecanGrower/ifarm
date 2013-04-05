@@ -10,7 +10,8 @@
 #
 
 class Farm < ActiveRecord::Base
-  attr_accessible :name, :weather_station_id, :blocks_attributes
+  attr_accessible :name, :weather_station_id, :blocks_attributes, 
+                  :irrigation_wells_attributes
 
   default_scope { where(company_id: Company.current_id) }
 
