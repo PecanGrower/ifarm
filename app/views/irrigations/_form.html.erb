@@ -1,23 +1,23 @@
-<table class="control-group">
-  <%= form_for @irrigation do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+<%= form_for @irrigation do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-    <tr>
-      <th><%= f.label :field_id %></th>
-      <th><%= f.label :time %></th>
-    </tr>
+  <div class="field">
+    <%= f.label :field_id %>
+    <%= f.collection_select :field_id,
+                            Field.all.sort_by(&:name_with_block),
+                            :id, :name_with_block %>
+  </div>
 
-    <tr>
-      <td class="controls">
-        <%= f.collection_select :field_id, 
-                                Field.all.sort_by(&:name_with_block), 
-                                :id, :name_with_block %>
+  <div class="field">
+    <%= f.label :time %>
+    <%= f.text_field :time, value: @update_time %>
+  </div>
 
-      </td>
-      <td>
-        <%= f.text_field :time, value: @update_time %>
-      </td>
-      <td><%= f.submit "Save", class: "btn btn-primary" %></td>
-    </tr>
+  <%= f.fields_for :meter_readings do |builder| %>
+    <%= render 'meter_reading_fields', f: builder %>
   <% end %>
-</table>
+
+  <%= link_to_add_fields "Add Meter Reading", f, :meter_readings %>
+
+  <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+<% end %>

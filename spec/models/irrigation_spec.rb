@@ -46,6 +46,7 @@ describe Irrigation do
     context "has mass assignment protection" do
       it { should_not allow_mass_assignment_of :field_id }
       it { should_not allow_mass_assignment_of :company_id }
+      it { should allow_mass_assignment_of :meter_readings_attributes }
     end
   end
 
@@ -61,6 +62,10 @@ describe Irrigation do
 
   describe "validation" do
     it { should validate_presence_of :time }
+  end
+
+  describe "association" do
+    it { should accept_nested_attributes_for :meter_readings }
   end
 
   describe "method" do

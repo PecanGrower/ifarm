@@ -1,0 +1,12 @@
+<fieldset>
+  <%= f.label :irrigation_well_id %>
+  <%= f.collection_select :irrigation_well_id,
+                          IrrigationWell.order("name"),
+                          :id, :name %>
+
+  <%= f.label :start %>
+  <%= f.text_field :start %>
+
+  <%= f.label :stop %>
+  <%= f.text_field :stop %>
+</fieldset>

@@ -12,11 +12,12 @@
 #
 
 class Irrigation < ActiveRecord::Base
-  attr_accessible :time
+  attr_accessible :time, :meter_readings_attributes
   attr_accessor :next_irrigation
 
   belongs_to :field
   has_many :meter_readings
+  accepts_nested_attributes_for :meter_readings
 
   default_scope { where(company_id: Company.current_id) }
 
