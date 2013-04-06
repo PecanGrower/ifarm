@@ -7,4 +7,6 @@ class MeterReading < ActiveRecord::Base
   default_scope { where(company_id: Company.current_id) }
 
   validates :irrigation_well_id, presence: true
+  validates :start, numericality: { only_integer: true }
+  validates :stop, numericality: { only_integer: true }
 end

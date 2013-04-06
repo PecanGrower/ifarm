@@ -50,6 +50,4 @@ describe IrrigationWell do
     it { should validate_uniqueness_of(:name).scoped_to :farm_id }
     it { should validate_presence_of :company_id }
   end
-
-
 end

@@ -46,6 +46,8 @@ FactoryGirl.define do
   end
 
   factory :meter_reading do
+    sequence(:start) { |n| 112233 + n }
+    sequence(:stop) { |n| 223344 + n }
     irrigation
     irrigation_well
   end

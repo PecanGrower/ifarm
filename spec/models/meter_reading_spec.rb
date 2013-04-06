@@ -52,5 +52,7 @@ describe MeterReading do
 
   describe "validations" do
     it { should validate_presence_of :irrigation_well_id }
+    it { should validate_numericality_of(:start).only_integer }
+    it { should validate_numericality_of(:stop).only_integer }
   end
 end
