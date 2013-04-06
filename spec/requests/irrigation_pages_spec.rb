@@ -80,10 +80,10 @@ describe "Irrigation" do
   end
 
   describe "edit page" do
-    let(:irrigation) { Irrigation.first }
+    let(:irrigation) { FactoryGirl.create(:irrigation) }
+    let(:meter_reading) { FactoryGirl.create(:meter_reading) }
     let(:time) { "4/1/2013 14:50" }
-    before do
-      FactoryGirl.create(:irrigation)
+    before do      
       visit edit_irrigation_path(irrigation)
       Company.current_id = user.company.id
     end

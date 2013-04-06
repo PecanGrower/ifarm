@@ -45,5 +45,10 @@ FactoryGirl.define do
     field
   end
 
+  factory :meter_reading do
+    irrigation
+    irrigation_well
+  end
+
 
 end
