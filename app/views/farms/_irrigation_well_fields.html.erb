@@ -1,7 +1,4 @@
-<fieldset>
-  <%= f.label :name, "Irrigation Well Name" %>
-  <%= f.text_field :name %>
+<%= f.text_field :name, class: 'input-small', placeholder: 'ex: Pump 1' %>
 
-  <%= f.label :pod_code, "POD Code" %>
-  <%= f.text_field :pod_code %>
-</fieldset>
+<%= f.text_field :pod_code, placeholder: 'ex: LRG-140085-POD1' %>
+<br>

@@ -1,7 +1,6 @@
-<fieldset>
-  <%= f.label :name, "Block" %>
-  <%= f.text_field :name %>
+<%= f.text_field :name, class: 'input-mini', placeholder: 'Block' %>
 
+<fieldset class='offset1'>
   <%= f.fields_for :fields do |builder| %>
     <%= render 'field_fields', f: builder %>
   <% end %>

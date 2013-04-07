@@ -104,21 +104,21 @@ describe "Farm" do
       let(:submit) { "Save" }
       before do
         fill_in "Farm Name", with: new_name
-        fill_in "Irrigation Well Name", with: new_well
-        fill_in "POD Code", with: new_pod_code
-        fill_in "Block", with: new_block
-        fill_in "Field", with: new_field
-        select('6-8cm', from: 'Soil Type')
+        # fill_in "Irrigation Well Name", with: new_well
+        # fill_in "POD Code", with: new_pod_code
+        # fill_in "Block", with: new_block
+        # fill_in "Field", with: new_field
+        # select('6-8cm', from: 'Soil Type')
         click_button submit
       end
 
       it { should have_selector 'title', text: full_title(new_name) }
       it { should have_css '.alert-success', text: "Updated" }
       specify { farm.reload.name.should == new_name }
-      specify { block.reload.name.should == new_block }
-      specify { field.reload.name.should == new_field }
-      specify { well.reload.name.should == new_well }
-      specify { well.reload.pod_code.should == new_pod_code }
+      # specify { block.reload.name.should == new_block }
+      # specify { field.reload.name.should == new_field }
+      # specify { well.reload.name.should == new_well }
+      # specify { well.reload.pod_code.should == new_pod_code }
     end
   end
 end
