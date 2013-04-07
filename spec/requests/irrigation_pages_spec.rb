@@ -66,7 +66,7 @@ describe "Irrigation" do
           FactoryGirl.create(:field, name: '1', block: block)
           visit irrigations_path
           select('1-1', from: 'Field')
-          fill_in "Time", with: "4/1/2013 14:50"
+          fill_in "irrigation_time", with: "4/1/2013 14:50"
           click_button "Save"
         end
 
@@ -91,7 +91,7 @@ describe "Irrigation" do
     context "with valid data" do
 
       it "should update the irrigation" do
-        fill_in 'Time', with: time
+        fill_in 'irrigation_time', with: time
         click_button 'Save'
         expect(page).to have_selector 'td', text: time.to_time.to_s(:long)
       end
@@ -105,7 +105,7 @@ describe "Irrigation" do
     context "with invalid data" do
 
       it "should have error message" do
-        fill_in 'Time', with: ""
+        fill_in 'irrigation_time', with: ""
         click_button 'Save'
         expect(page).to have_css '.alert-error'
       end
