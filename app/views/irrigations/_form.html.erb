@@ -1,24 +1,26 @@
-<%= form_for @irrigation do |f| %>
+<%= form_for @irrigation, html: { class: 'form-inline' } do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
 
-    <%= f.label :field_id %>
-    <%= f.collection_select :field_id,
-                            Field.all.sort_by(&:name_with_block),
-                            :id, :name_with_block, {},
-                            class: "input-small" %>
+  <%= f.collection_select :field_id,
+                          Field.all.sort_by(&:name_with_block),
+                          :id, :name_with_block, {},
+                          class: "input-small" %>
 
 
 
-    <%#= f.label :time %>
-    <%= f.text_field :time, value: @update_time, placeholder: "Date & Time",
-                            class: 'input-medium' %>
+  <%= f.text_field :time, value: @update_time, placeholder: "Date & Time",
+                          class: 'input-medium' %>
+
+  <%= tag("br") if @irrigation.meter_readings.any? %>
 
 
   <%= f.fields_for :meter_readings do |builder| %>
     <%= render 'meter_reading_fields', f: builder %>
   <% end %>
 
+  <%= tag("br") if @irrigation.meter_readings.empty? %>
+    
   <%= link_to_add_fields "Add Meter Reading", f, :meter_readings %>
 
   <%= f.submit "Save", class: "btn btn-primary" %>

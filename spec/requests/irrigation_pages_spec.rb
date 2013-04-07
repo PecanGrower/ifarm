@@ -65,7 +65,7 @@ describe "Irrigation" do
           block = FactoryGirl.create(:block, name: '1')
           FactoryGirl.create(:field, name: '1', block: block)
           visit irrigations_path
-          select('1-1', from: 'Field')
+          select('1-1', from: 'irrigation_field_id')
           fill_in "irrigation_time", with: "4/1/2013 14:50"
           click_button "Save"
         end
