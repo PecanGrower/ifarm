@@ -79,10 +79,22 @@ describe Irrigation do
     end
     
     describe ".next_irrigation_date" do
-      
-      it "should return a time" do
-        expect(irrigation.next_irrigation_date(Et.all, Kc.all, CurrentEt.all)).to be_kind_of(Date)
+
+      let(:next_irrigation) do
+        irrigation.next_irrigation_date(Et.all, Kc.all, CurrentEt.all)
       end
+      
+      it "should return a the next irrigation date" do
+        expect(next_irrigation).to be_kind_of(Date)
+        expect(next_irrigation).to be > irrigation.time.to_date
+      end
+
+      it "should properly handle irrigation interval that crosses new year" do
+        irrigation.time = "Dec 30, 2012 12:00"
+        irrigation.save
+        expect(next_irrigation.year).to be 2013
+      end
+
     end
   end
 end

@@ -25,13 +25,13 @@ class Irrigation < ActiveRecord::Base
 
   def self.next_irrigations
     current_irrigations = 
-    Field.includes(:irrigations).map do |field|
-      if field.irrigations.last
-        field.irrigations.order("time").last
-      else
-        field.irrigations.new(time: Time.new(Time.zone.now.year)-184.days)
+      Field.includes(:irrigations).map do |field|
+        if field.irrigations.last
+          field.irrigations.order("time").last
+        else
+          field.irrigations.new(time: Time.new(Time.zone.now.year)-184.days)
+        end
       end
-    end
     et ||= Et.order("doy")
     kc ||= Kc.order("doy")
     current_et ||= CurrentEt.order("doy")
@@ -46,15 +46,15 @@ class Irrigation < ActiveRecord::Base
     mad = 0.45
     aw = max_aw * mad
     interval = 0
-    doy = time.yday
+    date = time.to_date
     while aw > 0
+      doy = date.yday
       etref = current_et[doy-1].send(station.db_col) || 
               et[doy-1].send(station.db_col)
       kcref = kc[doy-1].pecan
       aw -= etref * kcref
-      doy += 1
-      interval += 1
+      date += 1
     end
-    time.to_date + interval.days
+    date
   end
 end
