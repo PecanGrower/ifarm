@@ -22,6 +22,12 @@ FactoryGirl.define do
     weather_station_id 1
   end
 
+  factory :rain do
+    date '5/1/2013'
+    amount 0.75
+    farm
+  end
+
   factory :irrigation_well do
     sequence(:name) { |n| "Pump #{n}" }
     sequence(:pod_code) { |n| "lrg-#{12345+n}-pod1" }

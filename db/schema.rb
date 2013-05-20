@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405194247) do
+ActiveRecord::Schema.define(:version => 20130520223900) do
 
   create_table "blocks", :force => true do |t|
     t.string   "name"
@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(:version => 20130405194247) do
   add_index "meter_readings", ["company_id"], :name => "index_meter_readings_on_company_id"
   add_index "meter_readings", ["irrigation_id"], :name => "index_meter_readings_on_irrigation_id"
   add_index "meter_readings", ["irrigation_well_id"], :name => "index_meter_readings_on_irrigation_well_id"
+
+  create_table "rains", :force => true do |t|
+    t.date     "date"
+    t.decimal  "amount"
+    t.integer  "farm_id"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "soil_classes", :force => true do |t|
     t.string   "name"

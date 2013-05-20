@@ -17,6 +17,7 @@ class Farm < ActiveRecord::Base
 
   has_many :blocks, order: "name"
   has_many :irrigation_wells, order: "name"
+  has_many :rains
   belongs_to :weather_station
   accepts_nested_attributes_for :blocks
   accepts_nested_attributes_for :irrigation_wells
