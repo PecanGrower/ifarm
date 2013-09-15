@@ -53,6 +53,9 @@ class Irrigation < ActiveRecord::Base
               et[doy-1].send(station.db_col)
       kcref = kc[doy-1].pecan
       aw -= etref * kcref
+      if aw > max_aw * mad
+        aw = max_aw * mad
+      end
       date += 1
     end
     date
